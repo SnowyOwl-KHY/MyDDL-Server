@@ -7,7 +7,7 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-        user_id, name
+        user_id, username
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
