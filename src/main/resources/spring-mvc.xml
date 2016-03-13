@@ -25,6 +25,15 @@
         <property name="alwaysUseFullPath" value="true"/>
     </bean>
 
+    <!--&lt;!&ndash; 登陆拦截器 &ndash;&gt;-->
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash; 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 &ndash;&gt;-->
+        <!--<mvc:interceptor>-->
+            <!--&lt;!&ndash;<mvc:mapping path="/users/**"/>&ndash;&gt;-->
+            <!--<bean class="myddl.interceptor.LoginInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
 
     <!-- 避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="stringConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -34,6 +43,8 @@
             </list>
         </property>
     </bean>
+
+    <!-- 输出对象转JSON支持 -->
     <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="objectMapper">
             <bean class="com.fasterxml.jackson.databind.ObjectMapper">
