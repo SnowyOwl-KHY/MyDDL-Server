@@ -3,7 +3,7 @@ package myddl.entity;
 public class UserInfo {
     private Long userId;
 
-    private String username;
+    private String nickname;
 
     public Long getUserId() {
         return userId;
@@ -13,11 +13,11 @@ public class UserInfo {
         this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 }
