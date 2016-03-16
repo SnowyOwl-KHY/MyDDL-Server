@@ -1,7 +1,11 @@
 package myddl.dao;
 
 import myddl.entity.UserCourse;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+@Component
 public interface UserCourseMapper {
     int deleteByPrimaryKey(Long courseId);
 
@@ -14,4 +18,7 @@ public interface UserCourseMapper {
     int updateByPrimaryKeySelective(UserCourse record);
 
     int updateByPrimaryKey(UserCourse record);
+
+
+    List<UserCourse> selectByUserId(long userId);
 }

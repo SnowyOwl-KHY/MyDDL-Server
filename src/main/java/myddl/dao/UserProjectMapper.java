@@ -1,7 +1,11 @@
 package myddl.dao;
 
 import myddl.entity.UserProject;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+@Component
 public interface UserProjectMapper {
     int deleteByPrimaryKey(Long projectId);
 
@@ -14,4 +18,7 @@ public interface UserProjectMapper {
     int updateByPrimaryKeySelective(UserProject record);
 
     int updateByPrimaryKey(UserProject record);
+
+
+    List<UserProject> selectByUserId(long userId);
 }
