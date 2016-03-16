@@ -24,6 +24,7 @@
         <property name="urlDecode" value="false"/>
         <property name="alwaysUseFullPath" value="true"/>
     </bean>
+    <mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
 
     <!--&lt;!&ndash; 登陆拦截器 &ndash;&gt;-->
     <!--<mvc:interceptors>-->

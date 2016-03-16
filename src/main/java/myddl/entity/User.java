@@ -1,7 +1,6 @@
 package myddl.entity;
 
 public class User {
-
     private Long userId;
 
     private String username;
@@ -19,6 +18,6 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username == null ? null : username.trim();
     }
 }
