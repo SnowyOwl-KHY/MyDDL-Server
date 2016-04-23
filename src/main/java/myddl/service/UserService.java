@@ -11,6 +11,12 @@ public interface UserService {
 
     UserRO getUser(long userId);
 
+    void addUser(UserInfo userInfo);
+
+    void updateUserInfo(UserInfo userInfo);
+
+    void deleteUser(long userId);
+
     void updateUserCourse(UserCourse userCourse);
 
     void addUserCourse(UserCourse userCourse);

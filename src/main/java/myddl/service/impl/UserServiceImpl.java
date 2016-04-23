@@ -34,6 +34,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void addUser(UserInfo userInfo) {
+        userInfoMapper.insertSelective(userInfo);
+    }
+
+    @Override
+    public void updateUserInfo(UserInfo userInfo) {
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
+    }
+
+    @Override
+    public void deleteUser(long userId) {
+        userInfoMapper.deleteByPrimaryKey(userId);
+    }
+
+    @Override
     public void updateUserCourse(UserCourse userCourse) {
         userCourseMapper.updateByPrimaryKeySelective(userCourse);
     }

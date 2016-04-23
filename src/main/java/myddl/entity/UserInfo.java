@@ -5,6 +5,13 @@ public class UserInfo {
 
     private String nickname;
 
+    public UserInfo() {
+    }
+
+    public UserInfo(String nickname) {
+        this.nickname = nickname;
+    }
+
     public Long getUserId() {
         return userId;
     }

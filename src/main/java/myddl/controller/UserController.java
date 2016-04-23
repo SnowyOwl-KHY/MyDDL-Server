@@ -1,9 +1,9 @@
 package myddl.controller;
 
+import myddl.entity.UserInfo;
+import myddl.returnobject.ReturnObject;
 import myddl.service.UserService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
@@ -17,6 +17,13 @@ public class UserController {
     @RequestMapping("/user/{userId}")
     @ResponseBody
     public Object getUser(@PathVariable("userId") Long userId) {
-        return userService.getUser(userId);
+        return ReturnObject.newOKReturnObject(userService.getUser(userId));
+    }
+
+    @RequestMapping(value = "/user/", method = RequestMethod.PUT)
+    @ResponseBody
+    public Object addUser(@RequestParam("nickname") String nickname) {
+        userService.addUser(new UserInfo(nickname));
+        return ReturnObject.EXECUTION_SUCCESS;
     }
 }
