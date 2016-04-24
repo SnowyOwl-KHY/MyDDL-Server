@@ -1,7 +1,9 @@
 package myddl.dao;
 
 import myddl.entity.UserInfo;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface UserInfoMapper {
     int deleteByPrimaryKey(Long userId);
 

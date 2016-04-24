@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myddl.dao.DeadlineMapper" >
+  <resultMap id="BaseResultMap" type="myddl.entity.Deadline" >
+    <id column="deadline_id" property="deadlineId" jdbcType="BIGINT" />
+    <result column="deadline_name" property="deadlineName" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="course_project_id" property="courseProjectId" jdbcType="BIGINT" />
+    <result column="contact_name" property="contactName" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="contact_email" property="contactEmail" jdbcType="VARCHAR" />
+    <result column="deadline_note" property="deadlineNote" jdbcType="VARCHAR" />
+    <result column="deadline_image" property="deadlineImage" jdbcType="VARCHAR" />
+    <result column="complete" property="complete" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    deadline_id, deadline_name, time, course_project_id, contact_name, contact_phone, 
+    contact_email, deadline_note, deadline_image, complete
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from myddl_deadline
+    where deadline_id = #{deadlineId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from myddl_deadline
+    where deadline_id = #{deadlineId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="myddl.entity.Deadline" >
+    insert into myddl_deadline (deadline_id, deadline_name, time, 
+      course_project_id, contact_name, contact_phone, 
+      contact_email, deadline_note, deadline_image, 
+      complete)
+    values (#{deadlineId,jdbcType=BIGINT}, #{deadlineName,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
+      #{courseProjectId,jdbcType=BIGINT}, #{contactName,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{contactEmail,jdbcType=VARCHAR}, #{deadlineNote,jdbcType=VARCHAR}, #{deadlineImage,jdbcType=VARCHAR}, 
+      #{complete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="myddl.entity.Deadline" >
+    insert into myddl_deadline
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deadlineId != null" >
+        deadline_id,
+      </if>
+      <if test="deadlineName != null" >
+        deadline_name,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="courseProjectId != null" >
+        course_project_id,
+      </if>
+      <if test="contactName != null" >
+        contact_name,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="contactEmail != null" >
+        contact_email,
+      </if>
+      <if test="deadlineNote != null" >
+        deadline_note,
+      </if>
+      <if test="deadlineImage != null" >
+        deadline_image,
+      </if>
+      <if test="complete != null" >
+        complete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deadlineId != null" >
+        #{deadlineId,jdbcType=BIGINT},
+      </if>
+      <if test="deadlineName != null" >
+        #{deadlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="courseProjectId != null" >
+        #{courseProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactEmail != null" >
+        #{contactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="deadlineNote != null" >
+        #{deadlineNote,jdbcType=VARCHAR},
+      </if>
+      <if test="deadlineImage != null" >
+        #{deadlineImage,jdbcType=VARCHAR},
+      </if>
+      <if test="complete != null" >
+        #{complete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.Deadline" >
+    update myddl_deadline
+    <set >
+      <if test="deadlineName != null" >
+        deadline_name = #{deadlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="courseProjectId != null" >
+        course_project_id = #{courseProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="contactName != null" >
+        contact_name = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactEmail != null" >
+        contact_email = #{contactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="deadlineNote != null" >
+        deadline_note = #{deadlineNote,jdbcType=VARCHAR},
+      </if>
+      <if test="deadlineImage != null" >
+        deadline_image = #{deadlineImage,jdbcType=VARCHAR},
+      </if>
+      <if test="complete != null" >
+        complete = #{complete,jdbcType=BIT},
+      </if>
+    </set>
+    where deadline_id = #{deadlineId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="myddl.entity.Deadline" >
+    update myddl_deadline
+    set deadline_name = #{deadlineName,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      course_project_id = #{courseProjectId,jdbcType=BIGINT},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      contact_email = #{contactEmail,jdbcType=VARCHAR},
+      deadline_note = #{deadlineNote,jdbcType=VARCHAR},
+      deadline_image = #{deadlineImage,jdbcType=VARCHAR},
+      complete = #{complete,jdbcType=BIT}
+    where deadline_id = #{deadlineId,jdbcType=BIGINT}
+  </update>
+</mapper>
