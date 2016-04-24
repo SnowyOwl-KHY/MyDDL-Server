@@ -35,4 +35,9 @@ public class UserServiceImpl implements UserService {
         List<CourseProject> courseProjects = courseProjectMapper.selectByUserId(userId);
         return new UserRO(userInfo, deadlines, groups, courseProjects, courseProjectMapper);
     }
+
+    @Override
+    public void addUser(UserInfo userInfo) {
+        userInfoMapper.insertSelective(userInfo);
+    }
 }

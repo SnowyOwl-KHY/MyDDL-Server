@@ -13,6 +13,18 @@ public class UserInfo {
 
     private Integer mainScreenImage;
 
+    public UserInfo() {
+    }
+
+    public UserInfo(Long userId, String userName, String userImage, String userPhone, String userEmail, Integer mainScreenImage) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userImage = userImage;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+        this.mainScreenImage = mainScreenImage;
+    }
+
     public Long getUserId() {
         return userId;
     }
