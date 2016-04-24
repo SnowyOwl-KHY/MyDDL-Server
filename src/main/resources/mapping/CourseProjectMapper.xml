@@ -1,78 +1,183 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="myddl.dao.CourseProjectMapper" >
-  <resultMap id="BaseResultMap" type="myddl.entity.CourseProject" >
-    <id column="course_project_id" property="courseProjectId" jdbcType="BIGINT" />
-    <result column="course_project_name" property="courseProjectName" jdbcType="VARCHAR" />
-    <result column="course_project_type" property="courseProjectType" jdbcType="VARCHAR" />
-    <result column="course_project_note" property="courseProjectNote" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myddl.dao.CourseProjectMapper">
+  <resultMap id="BaseResultMap" type="myddl.entity.CourseProject">
+    <id column="course_project_id" jdbcType="BIGINT" property="courseProjectId" />
+    <result column="course_project_name" jdbcType="VARCHAR" property="courseProjectName" />
+    <result column="course_project_type" jdbcType="VARCHAR" property="courseProjectType" />
+    <result column="course_project_note" jdbcType="VARCHAR" property="courseProjectNote" />
+    <result column="course_project_image" jdbcType="VARCHAR" property="courseProjectImage" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    course_project_id, course_project_name, course_project_type, course_project_note
+  <sql id="Base_Column_List">
+    course_project_id, course_project_name, course_project_type, course_project_note, 
+    course_project_image
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from myddl_course_project
     where course_project_id = #{courseProjectId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM myddl_course_project
+        WHERE course_project_id
+        EXISTS IN (
+          SELECT course_project_id
+          FROM myddl_user_course_project
+          WHERE user_id = #{userId}
+        )
+    </select>
+    
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from myddl_course_project
     where course_project_id = #{courseProjectId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="myddl.entity.CourseProject" >
+  <insert id="insert" parameterType="myddl.entity.CourseProject">
+    insert into myddl_course_project (course_project_id, course_project_name, 
+      course_project_type, course_project_note, course_project_image
+      )
+    values (#{courseProjectId,jdbcType=BIGINT}, #{courseProjectName,jdbcType=VARCHAR}, 
+      #{courseProjectType,jdbcType=VARCHAR}, #{courseProjectNote,jdbcType=VARCHAR}, #{courseProjectImage,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="myddl.entity.CourseProject">
+    insert into myddl_course_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseProjectId != null">
+        course_project_id,
+      </if>
+      <if test="courseProjectName != null">
+        course_project_name,
+      </if>
+      <if test="courseProjectType != null">
+        course_project_type,
+      </if>
+      <if test="courseProjectNote != null">
+        course_project_note,
+      </if>
+      <if test="courseProjectImage != null">
+        course_project_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseProjectId != null">
+        #{courseProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="courseProjectName != null">
+        #{courseProjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseProjectType != null">
+        #{courseProjectType,jdbcType=VARCHAR},
+      </if>
+      <if test="courseProjectNote != null">
+        #{courseProjectNote,jdbcType=VARCHAR},
+      </if>
+      <if test="courseProjectImage != null">
+        #{courseProjectImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.CourseProject">
+    update myddl_course_project
+    <set>
+      <if test="courseProjectName != null">
+        course_project_name = #{courseProjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseProjectType != null">
+        course_project_type = #{courseProjectType,jdbcType=VARCHAR},
+      </if>
+      <if test="courseProjectNote != null">
+        course_project_note = #{courseProjectNote,jdbcType=VARCHAR},
+      </if>
+      <if test="courseProjectImage != null">
+        course_project_image = #{courseProjectImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where course_project_id = #{courseProjectId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="myddl.entity.CourseProject">
+    update myddl_course_project
+    set course_project_name = #{courseProjectName,jdbcType=VARCHAR},
+      course_project_type = #{courseProjectType,jdbcType=VARCHAR},
+      course_project_note = #{courseProjectNote,jdbcType=VARCHAR},
+      course_project_image = #{courseProjectImage,jdbcType=VARCHAR}
+    where course_project_id = #{courseProjectId,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="myddl.entity.CourseProject">
+    <id column="course_project_id" jdbcType="BIGINT" property="courseProjectId" />
+    <result column="course_project_name" jdbcType="VARCHAR" property="courseProjectName" />
+    <result column="course_project_type" jdbcType="VARCHAR" property="courseProjectType" />
+    <result column="course_project_note" jdbcType="VARCHAR" property="courseProjectNote" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    course_project_id, course_project_name, course_project_type, course_project_note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from myddl_course_project
+    where course_project_id = #{courseProjectId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from myddl_course_project
+    where course_project_id = #{courseProjectId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="myddl.entity.CourseProject">
     insert into myddl_course_project (course_project_id, course_project_name, 
       course_project_type, course_project_note)
     values (#{courseProjectId,jdbcType=BIGINT}, #{courseProjectName,jdbcType=VARCHAR}, 
       #{courseProjectType,jdbcType=VARCHAR}, #{courseProjectNote,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="myddl.entity.CourseProject" >
+  <insert id="insertSelective" parameterType="myddl.entity.CourseProject">
     insert into myddl_course_project
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="courseProjectId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseProjectId != null">
         course_project_id,
       </if>
-      <if test="courseProjectName != null" >
+      <if test="courseProjectName != null">
         course_project_name,
       </if>
-      <if test="courseProjectType != null" >
+      <if test="courseProjectType != null">
         course_project_type,
       </if>
-      <if test="courseProjectNote != null" >
+      <if test="courseProjectNote != null">
         course_project_note,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="courseProjectId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseProjectId != null">
         #{courseProjectId,jdbcType=BIGINT},
       </if>
-      <if test="courseProjectName != null" >
+      <if test="courseProjectName != null">
         #{courseProjectName,jdbcType=VARCHAR},
       </if>
-      <if test="courseProjectType != null" >
+      <if test="courseProjectType != null">
         #{courseProjectType,jdbcType=VARCHAR},
       </if>
-      <if test="courseProjectNote != null" >
+      <if test="courseProjectNote != null">
         #{courseProjectNote,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.CourseProject" >
+  <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.CourseProject">
     update myddl_course_project
-    <set >
-      <if test="courseProjectName != null" >
+    <set>
+      <if test="courseProjectName != null">
         course_project_name = #{courseProjectName,jdbcType=VARCHAR},
       </if>
-      <if test="courseProjectType != null" >
+      <if test="courseProjectType != null">
         course_project_type = #{courseProjectType,jdbcType=VARCHAR},
       </if>
-      <if test="courseProjectNote != null" >
+      <if test="courseProjectNote != null">
         course_project_note = #{courseProjectNote,jdbcType=VARCHAR},
       </if>
     </set>
     where course_project_id = #{courseProjectId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="myddl.entity.CourseProject" >
+  <update id="updateByPrimaryKey" parameterType="myddl.entity.CourseProject">
     update myddl_course_project
     set course_project_name = #{courseProjectName,jdbcType=VARCHAR},
       course_project_type = #{courseProjectType,jdbcType=VARCHAR},

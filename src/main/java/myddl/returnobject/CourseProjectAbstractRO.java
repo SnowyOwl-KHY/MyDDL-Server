@@ -1,49 +1,59 @@
 package myddl.returnobject;
 
+import myddl.entity.CourseProject;
+
 public class CourseProjectAbstractRO {
-    private Long cpId;
-    private String cpName;
-    private String cpImage;
-    private String cpType;
-    private String cpNote;
+    private Long courseProjectId;
+    private String courseProjectName;
+    private String courseProjectType;
+    private String courseProjectNote;
+    private String courseProjectImage;
 
-    public Long getCpId() {
-        return cpId;
+    public CourseProjectAbstractRO(CourseProject courseProject) {
+        courseProjectId = courseProject.getCourseProjectId();
+        courseProjectName = courseProject.getCourseProjectName();
+        courseProjectType = courseProject.getCourseProjectType();
+        courseProjectNote = courseProject.getCourseProjectNote();
+        courseProjectImage = courseProject.getCourseProjectImage();
     }
 
-    public void setCpId(Long cpId) {
-        this.cpId = cpId;
+    public Long getCourseProjectId() {
+        return courseProjectId;
     }
 
-    public String getCpName() {
-        return cpName;
+    public void setCourseProjectId(Long courseProjectId) {
+        this.courseProjectId = courseProjectId;
     }
 
-    public void setCpName(String cpName) {
-        this.cpName = cpName;
+    public String getCourseProjectName() {
+        return courseProjectName;
     }
 
-    public String getCpImage() {
-        return cpImage;
+    public void setCourseProjectName(String courseProjectName) {
+        this.courseProjectName = courseProjectName;
     }
 
-    public void setCpImage(String cpImage) {
-        this.cpImage = cpImage;
+    public String getCourseProjectImage() {
+        return courseProjectImage;
     }
 
-    public String getCpType() {
-        return cpType;
+    public void setCourseProjectImage(String courseProjectImage) {
+        this.courseProjectImage = courseProjectImage;
     }
 
-    public void setCpType(String cpType) {
-        this.cpType = cpType;
+    public String getCourseProjectType() {
+        return courseProjectType;
     }
 
-    public String getCpNote() {
-        return cpNote;
+    public void setCourseProjectType(String courseProjectType) {
+        this.courseProjectType = courseProjectType;
     }
 
-    public void setCpNote(String cpNote) {
-        this.cpNote = cpNote;
+    public String getCourseProjectNote() {
+        return courseProjectNote;
+    }
+
+    public void setCourseProjectNote(String courseProjectNote) {
+        this.courseProjectNote = courseProjectNote;
     }
 }

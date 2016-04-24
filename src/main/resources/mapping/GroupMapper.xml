@@ -1,68 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="myddl.dao.GroupMapper" >
-  <resultMap id="BaseResultMap" type="myddl.entity.Group" >
-    <id column="group_id" property="groupId" jdbcType="BIGINT" />
-    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
-    <result column="group_image" property="groupImage" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="myddl.dao.GroupMapper">
+    <resultMap id="BaseResultMap" type="myddl.entity.Group">
+        <id column="group_id" property="groupId" jdbcType="BIGINT"/>
+        <result column="group_name" property="groupName" jdbcType="VARCHAR"/>
+        <result column="group_image" property="groupImage" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     group_id, group_name, group_image
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from myddl_group
-    where group_id = #{groupId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from myddl_group
+        where group_id = #{groupId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM myddl_group
+        WHERE group_id
+        EXISTS IN (
+          SELECT group_id
+          FROM myddl_user_group
+          WHERE user_id = #{userId}
+        )
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from myddl_group
     where group_id = #{groupId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="myddl.entity.Group" >
+    <insert id="insert" parameterType="myddl.entity.Group">
     insert into myddl_group (group_id, group_name, group_image
       )
     values (#{groupId,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, #{groupImage,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="myddl.entity.Group" >
-    insert into myddl_group
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="groupId != null" >
-        group_id,
-      </if>
-      <if test="groupName != null" >
-        group_name,
-      </if>
-      <if test="groupImage != null" >
-        group_image,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="groupId != null" >
-        #{groupId,jdbcType=BIGINT},
-      </if>
-      <if test="groupName != null" >
-        #{groupName,jdbcType=VARCHAR},
-      </if>
-      <if test="groupImage != null" >
-        #{groupImage,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.Group" >
-    update myddl_group
-    <set >
-      <if test="groupName != null" >
-        group_name = #{groupName,jdbcType=VARCHAR},
-      </if>
-      <if test="groupImage != null" >
-        group_image = #{groupImage,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where group_id = #{groupId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="myddl.entity.Group" >
+    <insert id="insertSelective" parameterType="myddl.entity.Group">
+        insert into myddl_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                group_id,
+            </if>
+            <if test="groupName != null">
+                group_name,
+            </if>
+            <if test="groupImage != null">
+                group_image,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                #{groupId,jdbcType=BIGINT},
+            </if>
+            <if test="groupName != null">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupImage != null">
+                #{groupImage,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.Group">
+        update myddl_group
+        <set>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupImage != null">
+                group_image = #{groupImage,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where group_id = #{groupId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="myddl.entity.Group">
     update myddl_group
     set group_name = #{groupName,jdbcType=VARCHAR},
       group_image = #{groupImage,jdbcType=VARCHAR}

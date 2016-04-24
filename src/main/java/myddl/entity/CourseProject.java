@@ -9,6 +9,8 @@ public class CourseProject {
 
     private String courseProjectNote;
 
+    private String courseProjectImage;
+
     public Long getCourseProjectId() {
         return courseProjectId;
     }
@@ -39,5 +41,13 @@ public class CourseProject {
 
     public void setCourseProjectNote(String courseProjectNote) {
         this.courseProjectNote = courseProjectNote == null ? null : courseProjectNote.trim();
+    }
+
+    public String getCourseProjectImage() {
+        return courseProjectImage;
+    }
+
+    public void setCourseProjectImage(String courseProjectImage) {
+        this.courseProjectImage = courseProjectImage == null ? null : courseProjectImage.trim();
     }
 }

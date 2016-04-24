@@ -19,10 +19,10 @@ public class UserController {
         return ReturnObject.newOKReturnObject(userService.getUser(userId));
     }
 
-    @RequestMapping(value = "/user/", method = RequestMethod.PUT)
-    @ResponseBody
-    public Object addUser(@RequestParam("nickname") String nickname) {
-        userService.addUser(new UserInfo(nickname));
-        return ReturnObject.EXECUTION_SUCCESS;
-    }
+//    @RequestMapping(value = "/user/", method = RequestMethod.PUT)
+//    @ResponseBody
+//    public Object addUser(@RequestParam("nickname") String nickname) {
+//        userService.addUser(new UserInfo(nickname));
+//        return ReturnObject.EXECUTION_SUCCESS;
+//    }
 }

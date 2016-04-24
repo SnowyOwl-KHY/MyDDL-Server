@@ -1,9 +1,17 @@
 package myddl.returnobject;
 
+import myddl.entity.Group;
+
 public class GroupAbstractRO {
     private Long groupId;
     private String groupName;
     private String groupImage;
+
+    public GroupAbstractRO(Group group) {
+        groupId = group.getGroupId();
+        groupName = group.getGroupName();
+        groupImage = group.getGroupImage();
+    }
 
     public Long getGroupId() {
         return groupId;

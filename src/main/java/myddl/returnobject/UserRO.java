@@ -1,5 +1,12 @@
 package myddl.returnobject;
 
+import myddl.dao.CourseProjectMapper;
+import myddl.entity.CourseProject;
+import myddl.entity.Deadline;
+import myddl.entity.Group;
+import myddl.entity.UserInfo;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserRO {
@@ -9,9 +16,33 @@ public class UserRO {
     private String userPhone;
     private String userEmail;
     private Integer mainScreenImage;
-    private List<DeadlineAbstractRO> deadlines;
-    private List<GroupAbstractRO> groups;
-    private List<CourseProjectAbstractRO> courseProjects;
+    private List<DeadlineAbstractRO> deadlines = new ArrayList<>();
+    private List<GroupAbstractRO> groups = new ArrayList<>();
+    private List<CourseProjectAbstractRO> courseProjects = new ArrayList<>();
+
+    public UserRO(UserInfo userInfo, List<Deadline> deadlines, List<Group> groups, List<CourseProject> courseProjects, CourseProjectMapper courseProjectMapper) {
+        userId = userInfo.getUserId();
+        userName = userInfo.getUserName();
+        userImage = userInfo.getUserImage();
+        userPhone = userInfo.getUserPhone();
+        userEmail = userInfo.getUserEmail();
+        mainScreenImage = userInfo.getMainScreenImage();
+
+        for (Deadline deadline : deadlines) {
+            DeadlineAbstractRO deadlineAbstractRO = new DeadlineAbstractRO(deadline, courseProjectMapper);
+            this.deadlines.add(deadlineAbstractRO);
+        }
+
+        for (Group group : groups) {
+            GroupAbstractRO groupAbstractRO = new GroupAbstractRO(group);
+            this.groups.add(groupAbstractRO);
+        }
+
+        for (CourseProject courseProject : courseProjects) {
+            CourseProjectAbstractRO courseProjectAbstractRO = new CourseProjectAbstractRO(courseProject);
+            this.courseProjects.add(courseProjectAbstractRO);
+        }
+    }
 
     public Long getUserId() {
         return userId;

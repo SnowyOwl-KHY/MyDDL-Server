@@ -1,11 +1,21 @@
 package myddl.returnobject;
 
+import myddl.dao.CourseProjectMapper;
+import myddl.entity.CourseProject;
+import myddl.entity.Deadline;
+
 public class DeadlineAbstractRO {
     private String deadlineName;
-    private String ownerType;
-    private Long ownerId;
-    private String ownerName;
     private String time;
+    private CourseProjectAbstractRO courseProject;
+
+    public DeadlineAbstractRO(Deadline deadline, CourseProjectMapper courseProjectMapper) {
+        deadlineName = deadline.getDeadlineName();
+        time = deadline.getTime();
+
+        CourseProject owner = courseProjectMapper.selectByPrimaryKey(deadline.getCourseProjectId());
+        courseProject = new CourseProjectAbstractRO(owner);
+    }
 
     public String getDeadlineName() {
         return deadlineName;
@@ -15,35 +25,19 @@ public class DeadlineAbstractRO {
         this.deadlineName = deadlineName;
     }
 
-    public String getOwnerType() {
-        return ownerType;
-    }
-
-    public void setOwnerType(String ownerType) {
-        this.ownerType = ownerType;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
-
     public String getTime() {
         return time;
     }
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public CourseProjectAbstractRO getCourseProject() {
+        return courseProject;
+    }
+
+    public void setCourseProject(CourseProjectAbstractRO courseProject) {
+        this.courseProject = courseProject;
     }
 }
