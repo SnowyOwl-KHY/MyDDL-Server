@@ -21,7 +21,7 @@
         <include refid="Base_Column_List"/>
         FROM myddl_group
         WHERE group_id
-        EXISTS IN (
+        IN (
           SELECT group_id
           FROM myddl_user_group
           WHERE user_id = #{userId}

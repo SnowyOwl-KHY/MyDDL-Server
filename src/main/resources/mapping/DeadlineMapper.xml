@@ -29,7 +29,7 @@
         <include refid="Base_Column_List"/>
         FROM myddl_deadline
         WHERE deadline_id
-        EXISTS IN (
+        IN (
           SELECT deadline_id
           FROM myddl_user_deadline
           WHERE user_id = #{userId}

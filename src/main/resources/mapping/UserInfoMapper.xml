@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myddl.dao.UserInfoMapper">
-  <resultMap id="BaseResultMap" type="myddl.entity.UserInfo">
-    <id column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="user_image" jdbcType="VARCHAR" property="userImage" />
-    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
-    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
-    <result column="main_screen_image" jdbcType="INTEGER" property="mainScreenImage" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="myddl.entity.UserInfo">
+        <id column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_image" jdbcType="VARCHAR" property="userImage"/>
+        <result column="user_phone" jdbcType="VARCHAR" property="userPhone"/>
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail"/>
+        <result column="main_screen_image" jdbcType="INTEGER" property="mainScreenImage"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     user_id, user_name, user_image, user_phone, user_email, main_screen_image
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from myddl_user_info
-    where user_id = #{userId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from myddl_user_info
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from myddl_user_info
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="myddl.entity.UserInfo">
+    <insert id="insert" parameterType="myddl.entity.UserInfo">
     insert into myddl_user_info (user_id, user_name, user_image, 
       user_phone, user_email, main_screen_image
       )
@@ -30,131 +30,77 @@
       #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{mainScreenImage,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="myddl.entity.UserInfo">
-    insert into myddl_user_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="userImage != null">
-        user_image,
-      </if>
-      <if test="userPhone != null">
-        user_phone,
-      </if>
-      <if test="userEmail != null">
-        user_email,
-      </if>
-      <if test="mainScreenImage != null">
-        main_screen_image,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userImage != null">
-        #{userImage,jdbcType=VARCHAR},
-      </if>
-      <if test="userPhone != null">
-        #{userPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="userEmail != null">
-        #{userEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="mainScreenImage != null">
-        #{mainScreenImage,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.UserInfo">
-    update myddl_user_info
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userImage != null">
-        user_image = #{userImage,jdbcType=VARCHAR},
-      </if>
-      <if test="userPhone != null">
-        user_phone = #{userPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="userEmail != null">
-        user_email = #{userEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="mainScreenImage != null">
-        main_screen_image = #{mainScreenImage,jdbcType=INTEGER},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="myddl.entity.UserInfo">
+    <insert id="insertSelective" parameterType="myddl.entity.UserInfo">
+        insert into myddl_user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userImage != null">
+                user_image,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="userEmail != null">
+                user_email,
+            </if>
+            <if test="mainScreenImage != null">
+                main_screen_image,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userImage != null">
+                #{userImage,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="mainScreenImage != null">
+                #{mainScreenImage,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.UserInfo">
+        update myddl_user_info
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userImage != null">
+                user_image = #{userImage,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                user_phone = #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                user_email = #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="mainScreenImage != null">
+                main_screen_image = #{mainScreenImage,jdbcType=INTEGER},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="myddl.entity.UserInfo">
     update myddl_user_info
     set user_name = #{userName,jdbcType=VARCHAR},
       user_image = #{userImage,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},
       main_screen_image = #{mainScreenImage,jdbcType=INTEGER}
-    where user_id = #{userId,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="myddl.entity.UserInfo">
-    <id column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    user_id, nickname
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user_info
-    where user_id = #{userId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user_info
-    where user_id = #{userId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="myddl.entity.UserInfo">
-    insert into user_info (user_id, nickname)
-    values (#{userId,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="myddl.entity.UserInfo">
-    insert into user_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="nickname != null">
-        nickname,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="nickname != null">
-        #{nickname,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.UserInfo">
-    update user_info
-    <set>
-      <if test="nickname != null">
-        nickname = #{nickname,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="myddl.entity.UserInfo">
-    update user_info
-    set nickname = #{nickname,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

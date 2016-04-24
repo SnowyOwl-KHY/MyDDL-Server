@@ -20,12 +20,12 @@ public class UserController {
         return ReturnObject.newOKReturnObject(userService.getUser(userId));
     }
 
-    @RequestMapping(value = "/user/", method = RequestMethod.PUT)
+    @RequestMapping(value = "/user", method = RequestMethod.PUT)
     @ResponseBody
     public Object addUser(@RequestParam("userName") String userName,
-                          @RequestParam("userImage") String userImage,
-                          @RequestParam("userPhone") String userPhone,
-                          @RequestParam("userEmail") String userEmail,
+                          @RequestParam(value = "userImage", required = false) String userImage,
+                          @RequestParam(value = "userPhone", required = false) String userPhone,
+                          @RequestParam(value = "userEmail", required = false) String userEmail,
                           @RequestParam("mainScreenImage") Integer mainScreenImage) {
         userService.addUser(new UserInfo(null, userName, userImage, userPhone, userEmail, mainScreenImage));
         return ReturnObject.EXECUTION_SUCCESS;
