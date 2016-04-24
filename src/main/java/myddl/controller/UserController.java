@@ -1,6 +1,5 @@
 package myddl.controller;
 
-import myddl.entity.UserInfo;
 import myddl.returnobject.ReturnObject;
 import myddl.service.UserService;
 import org.springframework.web.bind.annotation.*;

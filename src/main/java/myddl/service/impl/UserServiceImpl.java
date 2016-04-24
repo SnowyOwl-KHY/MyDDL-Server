@@ -1,11 +1,5 @@
 package myddl.service.impl;
 
-import myddl.dao.UserCourseMapper;
-import myddl.dao.UserInfoMapper;
-import myddl.dao.UserProjectMapper;
-import myddl.entity.UserCourse;
-import myddl.entity.UserInfo;
-import myddl.entity.UserProject;
 import myddl.returnobject.UserRO;
 import myddl.service.UserService;
 import org.springframework.stereotype.Service;

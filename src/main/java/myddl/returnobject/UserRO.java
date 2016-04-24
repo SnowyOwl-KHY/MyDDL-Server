@@ -1,45 +1,87 @@
 package myddl.returnobject;
 
-import myddl.entity.UserCourse;
-import myddl.entity.UserInfo;
-import myddl.entity.UserProject;
-
 import java.util.List;
 
 public class UserRO {
-    private UserInfo userInfo;
+    private Long userId;
+    private String userName;
+    private String userImage;
+    private String userPhone;
+    private String userEmail;
+    private Integer mainScreenImage;
+    private List<DeadlineAbstractRO> deadlines;
+    private List<GroupAbstractRO> groups;
+    private List<CourseProjectAbstractRO> courseProjects;
 
-    private List<UserCourse> userCourseList;
-
-    private List<UserProject> userProjectList;
-
-    public UserRO(UserInfo userInfo, List<UserCourse> userCourseList, List<UserProject> userProjectList) {
-        this.userInfo = userInfo;
-        this.userCourseList = userCourseList;
-        this.userProjectList = userProjectList;
+    public Long getUserId() {
+        return userId;
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public String getUserName() {
+        return userName;
     }
 
-    public List<UserCourse> getUserCourseList() {
-        return userCourseList;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setUserCourseList(List<UserCourse> userCourseList) {
-        this.userCourseList = userCourseList;
+    public String getUserImage() {
+        return userImage;
     }
 
-    public List<UserProject> getUserProjectList() {
-        return userProjectList;
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
-    public void setUserProjectList(List<UserProject> userProjectList) {
-        this.userProjectList = userProjectList;
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public Integer getMainScreenImage() {
+        return mainScreenImage;
+    }
+
+    public void setMainScreenImage(Integer mainScreenImage) {
+        this.mainScreenImage = mainScreenImage;
+    }
+
+    public List<DeadlineAbstractRO> getDeadlines() {
+        return deadlines;
+    }
+
+    public void setDeadlines(List<DeadlineAbstractRO> deadlines) {
+        this.deadlines = deadlines;
+    }
+
+    public List<GroupAbstractRO> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<GroupAbstractRO> groups) {
+        this.groups = groups;
+    }
+
+    public List<CourseProjectAbstractRO> getCourseProjects() {
+        return courseProjects;
+    }
+
+    public void setCourseProjects(List<CourseProjectAbstractRO> courseProjects) {
+        this.courseProjects = courseProjects;
     }
 }
