@@ -27,7 +27,7 @@ public class UserController {
         if (userRO != null) {
             return ReturnObject.newOKReturnObject(userRO);
         } else {
-            return ReturnObject.newErrorReturnObject(StatusCode.OK, ErrorCode.ERROR_USER_NOT_EXSIST);
+            return ReturnObject.newErrorReturnObject(StatusCode.OK, ErrorCode.ERROR_USER_NOT_EXIST);
         }
     }
 
