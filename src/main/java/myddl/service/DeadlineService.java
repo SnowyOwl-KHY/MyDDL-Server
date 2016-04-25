@@ -6,4 +6,6 @@ public interface DeadlineService {
 
     DeadlineRO getDeadline(Long deadlineId);
 
+    void deleteDeadline(Long deadlineId);
+
 }

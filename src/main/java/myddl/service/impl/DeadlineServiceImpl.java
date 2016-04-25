@@ -22,4 +22,9 @@ public class DeadlineServiceImpl implements DeadlineService {
         Deadline deadline = deadlineMapper.selectByPrimaryKey(deadlineId);
         return deadline == null ? null : new DeadlineRO(deadline, courseProjectMapper);
     }
+
+    @Override
+    public void deleteDeadline(Long deadlineId) {
+        deadlineMapper.deleteByPrimaryKey(deadlineId);
+    }
 }

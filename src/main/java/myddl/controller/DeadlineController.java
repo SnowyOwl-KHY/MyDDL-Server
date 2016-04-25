@@ -5,12 +5,15 @@ import myddl.constant.StatusCode;
 import myddl.returnobject.DeadlineRO;
 import myddl.returnobject.ReturnObject;
 import myddl.service.DeadlineService;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
+@Component
 @RequestMapping("/deadline")
 public class DeadlineController {
 
@@ -26,5 +29,12 @@ public class DeadlineController {
         } else {
             return ReturnObject.newErrorReturnObject(StatusCode.GONE, ErrorCode.ERROR_DEADLINE_NOT_EXIST);
         }
+    }
+
+    @RequestMapping(value = "/{deadlineId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Object deleteDeadline(@PathVariable("deadlineId") Long deadlineId) {
+        deadlineService.deleteDeadline(deadlineId);
+        return ReturnObject.EXECUTION_SUCCESS;
     }
 }
