@@ -32,58 +32,7 @@ public enum ErrorCode {
 
     ERROR_PARAMETER(1000, "参数错误"),
     ERROR_SYSTEM(1001, "系统错误"),
-    ERROR_RESOURCE_NOT_FOUND(1002, "资源不存在"),
-    ERROR_PARAMETER_NICKNAME(1003, "参数错误,昵称不能超过50个字"),
-    ERROR_PARAMETER_PHONE(1004, "参数错误,手机格式不正确"),
-    ERROR_PARAMETER_BRAND_ID_LIST(1005, "参数错误,喜好品牌格式不正确"),
-    ERROR_PARAMETER_UPDATE_USER_INFO(1006, "参数错误,昵称,肤质,喜好品牌,头像必须填写一个"),
-
-    ERROR_PARAMETER_SKIN(1007, "参数错误,肤质取值范围必须在1-5之间"),
-    ERROR_PARAMETER_TRIAL_ITEM_NOT_EXISTS(1008, "参数错误,此试用宝贝不存在"),
-    ERROR_PARAMETER_ADDRESS_NOT_EXISTS(1009, "参数错误,此地址不存在"),
-    ERROR_PARAMETER_TRIAL_APPLICATION_NOT_EXISTS(1010, "参数错误,此试用申请不存在"),
-    ERROR_PARAMETER_USER_NAME_LENGTH(1011, "参数错误,收货人姓名长度在0-10个字之间"),
-    ERROR_PARAMETER_ZIP_CODE_LENGTH(1012, "参数错误,邮编必须是6位数字"),
-    ERROR_PARAMETER_UPDATE_ADDRESS(1013, "参数错误,收货人,电话号码,收货地址,邮编必须填写一个"),
-    ERROR_PARAMETER_ADDRESS_LENGTH(1014, "参数错误,收货地址长度在0-50个字之间"),
-    ERROR_PARAMETER_ITEM_NOT_EXISTS(1015, "参数错误,此宝贝不存在"),
-
-
-    //用户注册类错误码
-    ERROR_USER_REGISTER(10001, "系统错误:用户注册失败"),
-    ERROR_USERNAME_OR_PASSWORD_EMPTY(10002, "用户名或者密码未填写"),
-    ERROR_WECHAT_USER_NOT_FOUND(10003, "未能找到此微信用户"),
-    ERROR_USER_NOT_FOUND(10004, "该用户不存在"),
-    ERROR_USER_LOGIN(10005, "系统错误:用户登录失败"),
-    ERROR_USER_UPDATE_USER(10009, "系统错误:更新用户信息失败"),
-    ERROR_USER_HEAD_IMG(10006, "系统错误:保存用户头像url失败"),
-    ERROR_USER_VALIDATE_CHECKCODE(10007, "验证码校验不通过"),
-    ERROR_USER_ALREADY_EXISTS(10008, "此用户信息已经完善"),
-
-    ERROR_BEAUTICIAN_NOT_FOUND(20001, "未找到此美容师信息"),
-
-    ERROR_ADDRESS_EXCEED_MAX_NUMBER(30001, "收货地址最多不能超过10条"),
-    ERROR_ADDRESS_ADD(30002, "系统错误:新增地址失败"),
-    ERROR_ADDRESS_NOT_ITEM(30003, "此地区不提供这项服务"),
-
-    ERROR_COMMENT_ADD(40001, "系统国务:创建评论失败"),
-    ERROR_CREATE_ORDER_ERROR(40002, "系统错误,创建订单失败，请重试"),
-    ERROR_RANKING_ITEMS_NOT_FOUND(40003, "未找到排行榜产品信息"),
-
-
-    ERROR_RANKING_NUMBER_ADD(50003, "系统错误:排行榜期数保存失败"),
-    ERROR_COUPON_LIMIT_ERROR(50004, "此优惠券不满足满减金额"),
-    ERROR_COUPON_TIME_ERROR(50005, "优惠券使用时间有误"),
-    ERROR_COUPON_ITEM_ERROR(50006, "优惠券不能用于此服务"),
-
-    ERROR_CREATE_TRIAL_APPLICATION_ERROR(60001, "系统错误,创建申请试用失败，请重试"),
-    ERROR_CANCEL_TRIAL_APPLICATION_ERROR(60002, "系统错误,取消试用申请失败，请重试"),
-    ERROR_SUCCEED_TRIAL_APPLICATION_ERROR(60003, "系统错误,评论失败失败，请重试"),
-    ERROR_SUCCEED_TRIAL_APPLICATION_EXIST(60004, "您已经申请了此试用"),
-
-
-    ERROR_ITEM_NOT_FOUND(110002, "未找到此服务信息"),
-    ERROR_ITEM_GET_ERROR(120001, "系统错误:加载服务失败");
+    ERROR_USER_NOT_EXSIST(10001, "用户不存在");
 
 
     private final int errorCode;

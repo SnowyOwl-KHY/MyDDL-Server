@@ -30,6 +30,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRO getUser(Long userId) {
         UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userId);
+        if (userInfo == null) return null;
+
         List<Deadline> deadlines = deadlineMapper.selectByUserId(userId);
         List<Group> groups = groupMapper.selectByUserId(userId);
         List<CourseProject> courseProjects = courseProjectMapper.selectByUserId(userId);
@@ -42,7 +44,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(UserInfo userInfo) {
-        userInfoMapper.insertSelective(userInfo);
+    public int addUser(UserInfo userInfo) {
+        return userInfoMapper.insertSelective(userInfo);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        userInfoMapper.deleteByPrimaryKey(userId);
     }
 }

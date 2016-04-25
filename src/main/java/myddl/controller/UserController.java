@@ -1,12 +1,17 @@
 package myddl.controller;
 
+import myddl.constant.ErrorCode;
+import myddl.constant.StatusCode;
 import myddl.entity.UserInfo;
 import myddl.returnobject.ReturnObject;
+import myddl.returnobject.UserRO;
 import myddl.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -18,7 +23,12 @@ public class UserController {
     @RequestMapping("/{userId}")
     @ResponseBody
     public Object getUser(@PathVariable("userId") Long userId) {
-        return ReturnObject.newOKReturnObject(userService.getUser(userId));
+        UserRO userRO = userService.getUser(userId);
+        if (userRO != null) {
+            return ReturnObject.newOKReturnObject(userRO);
+        } else {
+            return ReturnObject.newErrorReturnObject(StatusCode.OK, ErrorCode.ERROR_USER_NOT_EXSIST);
+        }
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.POST)
@@ -33,14 +43,23 @@ public class UserController {
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
+    @RequestMapping(value = "", method = RequestMethod.PUT)
     @ResponseBody
     public Object addUser(@RequestParam("userName") String userName,
                           @RequestParam(value = "userImage", required = false) String userImage,
                           @RequestParam(value = "userPhone", required = false) String userPhone,
                           @RequestParam(value = "userEmail", required = false) String userEmail,
                           @RequestParam("mainScreenImage") Integer mainScreenImage) {
-        userService.addUser(new UserInfo(null, userName, userImage, userPhone, userEmail, mainScreenImage));
+        long userId = userService.addUser(new UserInfo(null, userName, userImage, userPhone, userEmail, mainScreenImage));
+        Map<String, Object> result = new HashMap<>();
+        result.put("userId", userId);
+        return ReturnObject.newOKReturnObject(result);
+    }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Object deleteUser(@PathVariable("userId") Long userId) {
+        userService.deleteUser(userId);
         return ReturnObject.EXECUTION_SUCCESS;
     }
 }

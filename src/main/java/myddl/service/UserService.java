@@ -9,6 +9,7 @@ public interface UserService {
 
     void modifyUser(UserInfo userInfo);
 
-    void addUser(UserInfo userInfo);
+    int addUser(UserInfo userInfo);
 
+    void deleteUser(Long userId);
 }
