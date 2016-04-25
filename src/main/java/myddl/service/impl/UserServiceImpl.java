@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void modifyUser(UserInfo userInfo) {
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
+    }
+
+    @Override
     public void addUser(UserInfo userInfo) {
         userInfoMapper.insertSelective(userInfo);
     }

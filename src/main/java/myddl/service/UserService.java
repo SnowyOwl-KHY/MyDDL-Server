@@ -7,6 +7,8 @@ public interface UserService {
 
     UserRO getUser(Long userId);
 
+    void modifyUser(UserInfo userInfo);
+
     void addUser(UserInfo userInfo);
 
 }
