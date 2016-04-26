@@ -148,8 +148,8 @@
 #####入参： 
 	* deadlineId		int		deadline的id
 	  deadlineName		String
-	  courseProjectId	int
 	  time				String	"yyyy-MM-dd hh:mm"
+	  courseProjectId	int
 	  contactName		String
 	  contactPhone		String
 	  contactEmail		String

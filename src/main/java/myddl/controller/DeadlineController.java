@@ -2,14 +2,12 @@ package myddl.controller;
 
 import myddl.constant.ErrorCode;
 import myddl.constant.StatusCode;
+import myddl.entity.Deadline;
 import myddl.returnobject.DeadlineRO;
 import myddl.returnobject.ReturnObject;
 import myddl.service.DeadlineService;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -29,6 +27,22 @@ public class DeadlineController {
         } else {
             return ReturnObject.newErrorReturnObject(StatusCode.GONE, ErrorCode.ERROR_DEADLINE_NOT_EXIST);
         }
+    }
+
+    @RequestMapping("/{deadlineId}")
+    @ResponseBody
+    public Object modifyDeadline(@PathVariable("deadlineId") Long deadlineId,
+                                 @RequestParam(value = "deadlineName", required = false) String deadlineName,
+                                 @RequestParam(value = "time", required = false) String time,
+                                 @RequestParam(value = "courseProjectId", required = false) Long courseProjectId,
+                                 @RequestParam(value = "contactName", required = false) String contactName,
+                                 @RequestParam(value = "contactPhone", required = false) String contactPhone,
+                                 @RequestParam(value = "contactEmail", required = false) String contactEmail,
+                                 @RequestParam(value = "deadlineNote", required = false) String deadlineNote,
+                                 @RequestParam(value = "deadlineImage", required = false) String deadlineImage,
+                                 @RequestParam(value = "complete", required = false) Boolean complete) {
+        deadlineService.modifyDeadline(new Deadline(deadlineId, deadlineName, time, courseProjectId, contactName, contactPhone, contactEmail, deadlineNote, deadlineImage, complete));
+        return ReturnObject.EXECUTION_SUCCESS;
     }
 
     @RequestMapping(value = "/{deadlineId}", method = RequestMethod.DELETE)

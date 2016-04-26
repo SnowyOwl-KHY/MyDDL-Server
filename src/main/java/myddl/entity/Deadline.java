@@ -21,6 +21,22 @@ public class Deadline {
 
     private Boolean complete;
 
+    public Deadline() {
+    }
+
+    public Deadline(Long deadlineId, String deadlineName, String time, Long courseProjectId, String contactName, String contactPhone, String contactEmail, String deadlineNote, String deadlineImage, Boolean complete) {
+        this.deadlineId = deadlineId;
+        this.deadlineName = deadlineName;
+        this.time = time;
+        this.courseProjectId = courseProjectId;
+        this.contactName = contactName;
+        this.contactPhone = contactPhone;
+        this.contactEmail = contactEmail;
+        this.deadlineNote = deadlineNote;
+        this.deadlineImage = deadlineImage;
+        this.complete = complete;
+    }
+
     public Long getDeadlineId() {
         return deadlineId;
     }
