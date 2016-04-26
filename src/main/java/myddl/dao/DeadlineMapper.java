@@ -12,6 +12,8 @@ public interface DeadlineMapper {
 
     List<Deadline> selectByGroupId(Long groupId);
 
+    List<Deadline> selectByCourseProjectId(Long courseProjectId);
+
     int insertUserDeadline(@Param("userId") Long userId, @Param("deadlineId") Long deadlineId);
 
 

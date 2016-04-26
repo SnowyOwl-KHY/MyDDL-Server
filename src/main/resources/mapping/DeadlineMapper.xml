@@ -48,6 +48,13 @@
         )
     </select>
 
+    <select id="selectByCourseProjectId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM myddl_deadline
+        WHERE course_project_id = #{courseProjectId}
+    </select>
+
     <insert id="insertUserDeadline">
         INSERT INTO myddl_user_deadline(user_id, deadline_id)
         VALUES (#{userId}, #{deadlineId})
