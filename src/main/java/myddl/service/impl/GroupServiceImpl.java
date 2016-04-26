@@ -1,6 +1,5 @@
 package myddl.service.impl;
 
-import myddl.dao.CourseProjectMapper;
 import myddl.dao.DeadlineMapper;
 import myddl.dao.GroupMapper;
 import myddl.dao.UserInfoMapper;
@@ -23,8 +22,6 @@ public class GroupServiceImpl implements GroupService {
     UserInfoMapper userInfoMapper;
     @Resource
     DeadlineMapper deadlineMapper;
-    @Resource
-    CourseProjectMapper courseProjectMapper;
 
     @Override
     public GroupRO getGroup(Long groupId) {
@@ -33,6 +30,27 @@ public class GroupServiceImpl implements GroupService {
 
         List<UserInfo> users = userInfoMapper.selectByGroupId(groupId);
         List<Deadline> deadlines = deadlineMapper.selectByGroupId(groupId);
-        return new GroupRO(group, users, deadlines, courseProjectMapper);
+        return new GroupRO(group, users, deadlines);
+    }
+
+    @Override
+    public void modifyGroup(Group group) {
+        groupMapper.updateByPrimaryKeySelective(group);
+    }
+
+    @Override
+    public Long addGroup(Group group) {
+        long groupId = groupMapper.insertSelective(group);
+        return groupId;
+    }
+
+    @Override
+    public void deleteGroup(Long groupId) {
+        groupMapper.deleteByPrimaryKey(groupId);
+    }
+
+    @Override
+    public void addGroupUser(Long groupId, Long userId) {
+        groupMapper.insertGroupUser(groupId, userId);
     }
 }

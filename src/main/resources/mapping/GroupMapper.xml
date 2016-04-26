@@ -28,6 +28,11 @@
         )
     </select>
 
+    <insert id="insertGroupUser" >
+        INSERT INTO myddl_user_group(user_id, group_id)
+        VALUES(#{userId}, #{groupId})
+    </insert>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from myddl_group
     where group_id = #{groupId,jdbcType=BIGINT}

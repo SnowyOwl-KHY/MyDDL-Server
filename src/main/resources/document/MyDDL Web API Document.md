@@ -60,6 +60,7 @@
        	mainScreenImage: 序号
        	deadlines: [
        		{
+       			deadlineId: ...
        			deadlineName: ...
        			time: "yyyy-MM-dd hh:mm"
        			courseProject: {
@@ -233,7 +234,6 @@
 ###新增group
 ####PUT /group
 #####入参：
-	* groupId		int		group的id
 	* groupName		String
 	  groupImage	String	url
 

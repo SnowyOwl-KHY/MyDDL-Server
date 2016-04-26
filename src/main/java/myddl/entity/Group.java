@@ -7,6 +7,15 @@ public class Group {
 
     private String groupImage;
 
+    public Group() {
+    }
+
+    public Group(Long groupId, String groupName, String groupImage) {
+        this.groupId = groupId;
+        this.groupName = groupName;
+        this.groupImage = groupImage;
+    }
+
     public Long getGroupId() {
         return groupId;
     }
