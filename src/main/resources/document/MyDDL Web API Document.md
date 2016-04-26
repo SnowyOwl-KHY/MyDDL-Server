@@ -164,8 +164,7 @@
 	
 ###新增deadline
 ####PUT /deadline
-#####入参：
-	* deadlineId		int		deadline的id
+##### 入参：
 	* deadlineName		String
 	* courseProjectId	int
 	* userId			int

@@ -19,7 +19,7 @@ public class Deadline {
 
     private String deadlineImage;
 
-    private Boolean complete;
+    private Boolean complete = false;
 
     public Deadline() {
     }

@@ -9,6 +9,8 @@ public interface DeadlineService {
 
     void modifyDeadline(Deadline deadline);
 
+    long addDeadline(Deadline deadline, Long userId);
+
     void deleteDeadline(Long deadlineId);
 
 }

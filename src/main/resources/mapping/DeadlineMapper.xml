@@ -36,6 +36,11 @@
         )
     </select>
 
+    <insert id="insertUserDeadline">
+        INSERT INTO myddl_user_deadline(user_id, deadline_id)
+        VALUES (#{userId}, #{deadlineId})
+    </insert>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from myddl_deadline
     where deadline_id = #{deadlineId,jdbcType=BIGINT}

@@ -29,7 +29,7 @@ public class DeadlineController {
         }
     }
 
-    @RequestMapping("/{deadlineId}")
+    @RequestMapping(value = "/{deadlineId}", method = RequestMethod.POST)
     @ResponseBody
     public Object modifyDeadline(@PathVariable("deadlineId") Long deadlineId,
                                  @RequestParam(value = "deadlineName", required = false) String deadlineName,
@@ -42,6 +42,24 @@ public class DeadlineController {
                                  @RequestParam(value = "deadlineImage", required = false) String deadlineImage,
                                  @RequestParam(value = "complete", required = false) Boolean complete) {
         deadlineService.modifyDeadline(new Deadline(deadlineId, deadlineName, time, courseProjectId, contactName, contactPhone, contactEmail, deadlineNote, deadlineImage, complete));
+        return ReturnObject.EXECUTION_SUCCESS;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @ResponseBody
+    public Object addDeadline(@RequestParam("deadlineName") String deadlineName,
+                              @RequestParam("time") String time,
+                              @RequestParam("courseProjectId") Long courseProjectId,
+                              @RequestParam("userId") Long userId,
+                              @RequestParam(value = "contactName", required = false) String contactName,
+                              @RequestParam(value = "contactPhone", required = false) String contactPhone,
+                              @RequestParam(value = "contactEmail", required = false) String contactEmail,
+                              @RequestParam(value = "deadlineNote", required = false) String deadlineNote,
+                              @RequestParam(value = "deadlineImage", required = false) String deadlineImage,
+                              @RequestParam(value = "complete", required = false) Boolean complete) {
+        deadlineService.addDeadline(
+                new Deadline(null, deadlineName, time, courseProjectId, contactName, contactPhone, contactEmail, deadlineNote, deadlineImage, complete),
+                userId);
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
