@@ -30,9 +30,21 @@
         FROM myddl_deadline
         WHERE deadline_id
         IN (
-          SELECT deadline_id
-          FROM myddl_user_deadline
-          WHERE user_id = #{userId}
+        SELECT deadline_id
+        FROM myddl_user_deadline
+        WHERE user_id = #{userId}
+        )
+    </select>
+
+    <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM myddl_deadline
+        WHERE deadline_id
+        IN (
+        SELECT deadline_id
+        FROM myddl_group_deadline
+        WHERE group_id = #{groupId}
         )
     </select>
 

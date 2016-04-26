@@ -10,6 +10,8 @@ import java.util.List;
 public interface DeadlineMapper {
     List<Deadline> selectByUserId(Long userId);
 
+    List<Deadline> selectByGroupId(Long groupId);
+
     int insertUserDeadline(@Param("userId") Long userId, @Param("deadlineId") Long deadlineId);
 
 

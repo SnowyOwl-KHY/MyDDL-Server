@@ -18,6 +18,18 @@
         from myddl_user_info
         where user_id = #{userId,jdbcType=BIGINT}
     </select>
+
+    <select id="selectByGroupId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM myddl_user_info
+        WHERE user_id IN (
+        SELECT user_id
+        FROM myddl_user_group
+        WHERE group_id = #{groupId}
+        )
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from myddl_user_info
     where user_id = #{userId,jdbcType=BIGINT}
