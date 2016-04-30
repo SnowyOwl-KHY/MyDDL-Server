@@ -315,6 +315,7 @@
 ####PUT /courseProject
 #####入参：
 	* courseProjectId		int		courseProject的id
+	* userId				int 	用户id
 	* courseProjectName		String	
 	* courseProjectType		String	course/project
 	  courseProjectNote		String

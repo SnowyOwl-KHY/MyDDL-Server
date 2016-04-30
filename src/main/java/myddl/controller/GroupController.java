@@ -6,19 +6,19 @@ import myddl.entity.Group;
 import myddl.returnobject.GroupRO;
 import myddl.returnobject.ReturnObject;
 import myddl.service.GroupService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+@Controller
 @RequestMapping("/group")
 public class GroupController {
 
     @Resource
-    GroupService groupService;
+    private GroupService groupService;
 
     @RequestMapping("/{groupId}")
     @ResponseBody

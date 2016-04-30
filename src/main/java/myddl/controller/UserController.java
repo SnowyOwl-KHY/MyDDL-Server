@@ -18,7 +18,7 @@ import java.util.Map;
 public class UserController {
 
     @Resource
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping("/{userId}")
     @ResponseBody

@@ -6,17 +6,17 @@ import myddl.entity.Deadline;
 import myddl.returnobject.DeadlineRO;
 import myddl.returnobject.ReturnObject;
 import myddl.service.DeadlineService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-@Component
+@Controller
 @RequestMapping("/deadline")
 public class DeadlineController {
 
     @Resource
-    DeadlineService deadlineService;
+    private DeadlineService deadlineService;
 
     @RequestMapping("/{deadlineId}")
     @ResponseBody

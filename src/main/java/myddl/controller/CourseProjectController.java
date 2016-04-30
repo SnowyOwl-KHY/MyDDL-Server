@@ -5,19 +5,19 @@ import myddl.constant.StatusCode;
 import myddl.returnobject.CourseProjectRO;
 import myddl.returnobject.ReturnObject;
 import myddl.service.CourseProjectService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
-@Component
+@Controller
 @RequestMapping("/courseProject")
 public class CourseProjectController {
 
     @Resource
-    CourseProjectService courseProjectService;
+    private CourseProjectService courseProjectService;
 
     @RequestMapping("/{courseProjectId}")
     @ResponseBody
