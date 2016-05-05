@@ -7,6 +7,15 @@ public class UserPassword {
 
     private String password;
 
+    public UserPassword() {
+    }
+
+    public UserPassword(Long userId, String username, String password) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getUserId() {
         return userId;
     }

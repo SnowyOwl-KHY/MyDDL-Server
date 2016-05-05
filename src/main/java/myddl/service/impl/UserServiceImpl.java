@@ -45,17 +45,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void modifyUser(UserInfo userInfo) {
+    public void modifyUser(UserPassword userPassword, UserInfo userInfo) {
+        userPasswordMapper.updateByPrimaryKeySelective(userPassword);
         userInfoMapper.updateByPrimaryKeySelective(userInfo);
     }
 
     @Override
-    public int addUser(UserInfo userInfo) {
-        return userInfoMapper.insertSelective(userInfo);
+    public long addUser(UserPassword userPassword, UserInfo userInfo) {
+        long userId = userPasswordMapper.insertSelective(userPassword);
+        userInfo.setUserId(userId);
+        userInfoMapper.insertSelective(userInfo);
+        return userId;
     }
 
     @Override
     public void deleteUser(Long userId) {
+        userPasswordMapper.deleteByPrimaryKey(userId);
         userInfoMapper.deleteByPrimaryKey(userId);
     }
 }

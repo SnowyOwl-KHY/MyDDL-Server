@@ -1,6 +1,7 @@
 package myddl.service;
 
 import myddl.entity.UserInfo;
+import myddl.entity.UserPassword;
 import myddl.returnobject.UserRO;
 
 public interface UserService {
@@ -9,9 +10,9 @@ public interface UserService {
 
     UserRO getUser(Long userId);
 
-    void modifyUser(UserInfo userInfo);
+    void modifyUser(UserPassword userPassword, UserInfo userInfo);
 
-    int addUser(UserInfo userInfo);
+    long addUser(UserPassword userPassword, UserInfo userInfo);
 
     void deleteUser(Long userId);
 }
