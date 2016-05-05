@@ -85,7 +85,7 @@ public class UserController {
 
     @RequestMapping("/{userId}/pushDeadline")
     @ResponseBody
-    public Object getPushDeadline(@PathVariable("userId") Long userId) {
-        return ReturnObject.newOKReturnObject(deadlineService.getPushDeadline(userId));
+    public Object getPushedDeadline(@PathVariable("userId") Long userId) {
+        return ReturnObject.newOKReturnObject(deadlineService.getPushedDeadline(userId));
     }
 }

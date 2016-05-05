@@ -9,7 +9,7 @@ public interface DeadlineService {
 
     DeadlineRO getDeadline(Long deadlineId);
 
-    List<DeadlineRO> getPushDeadline(Long userId);
+    List<DeadlineRO> getPushedDeadline(Long userId);
 
     void modifyDeadline(Deadline deadline);
 

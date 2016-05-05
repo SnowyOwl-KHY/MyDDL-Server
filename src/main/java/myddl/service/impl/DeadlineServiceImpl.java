@@ -31,7 +31,7 @@ public class DeadlineServiceImpl implements DeadlineService {
     }
 
     @Override
-    public List<DeadlineRO> getPushDeadline(Long userId) {
+    public List<DeadlineRO> getPushedDeadline(Long userId) {
         List<PushDeadline> pushDeadlines = pushDeadlineMapper.selectByUserId(userId);
         List<DeadlineRO> result = pushDeadlines.stream()
                 .map(pushDeadline -> getDeadline(pushDeadline.getDeadlineId()))
