@@ -73,6 +73,12 @@ public class GroupController {
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
-
+    @RequestMapping(value = "/{groupId}/user/{userId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Object deleteGroupUser(@PathVariable("groupId") Long groupId,
+                                  @PathVariable("userId") Long userId) {
+        // delete group user and copy a duplicate of group deadline to this user. (if the user has anyone.)
+        return ReturnObject.EXECUTION_SUCCESS;
+    }
 
 }
