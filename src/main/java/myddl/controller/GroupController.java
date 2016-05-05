@@ -62,14 +62,7 @@ public class GroupController {
     public Object addGroupUser(@PathVariable("groupId") Long groupId,
                                @PathVariable("userId") Long userId) {
         groupService.addGroupUser(groupId, userId);
-        return ReturnObject.EXECUTION_SUCCESS;
-    }
-
-    @RequestMapping(value = "/{groupId}/deadline", method = RequestMethod.PUT)
-    @ResponseBody
-    public Object addGroupDeadline(@PathVariable("groupId") Long groupId,
-                                   @RequestParam("deadlineId") Long deadlineId) {
-        // add the deadline to the push deadline of all user
+        // TODO: push the group deadline to this new user
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
@@ -77,7 +70,23 @@ public class GroupController {
     @ResponseBody
     public Object deleteGroupUser(@PathVariable("groupId") Long groupId,
                                   @PathVariable("userId") Long userId) {
-        // delete group user and copy a duplicate of group deadline to this user. (if the user has anyone.)
+        // TODO: delete group user and copy a duplicate of group deadline to this user. (if the user has anyone.)
+        return ReturnObject.EXECUTION_SUCCESS;
+    }
+
+    @RequestMapping(value = "/{groupId}/deadline", method = RequestMethod.PUT)
+    @ResponseBody
+    public Object addGroupDeadline(@PathVariable("groupId") Long groupId,
+                                   @RequestParam("deadlineId") Long deadlineId) {
+        // TODO: add the deadline to the push deadline of all user
+        return ReturnObject.EXECUTION_SUCCESS;
+    }
+
+    @RequestMapping(value = "/{groupId}/deadline/{deadlineId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Object deleteGroupDeadline(@PathVariable("groupId") Long groupId,
+                                   @PathVariable("deadlineId") Long deadlineId) {
+        // TODO: delete and copy a duplicate
         return ReturnObject.EXECUTION_SUCCESS;
     }
 

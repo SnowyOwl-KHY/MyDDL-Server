@@ -102,6 +102,7 @@ public class UserController {
     public Object addExistDeadlineToUser(@PathVariable("userId") Long userId,
                                          @RequestParam("deadlineId") Long deadlineId) {
         deadlineService.addExistDeadlineToUser(userId, deadlineId);
+        // TODO: add exist courseProject to this user
         return ReturnObject.EXECUTION_SUCCESS;
     }
 }
