@@ -1,13 +1,7 @@
 package myddl.service.impl;
 
-import myddl.dao.CourseProjectMapper;
-import myddl.dao.DeadlineMapper;
-import myddl.dao.GroupMapper;
-import myddl.dao.UserInfoMapper;
-import myddl.entity.CourseProject;
-import myddl.entity.Deadline;
-import myddl.entity.Group;
-import myddl.entity.UserInfo;
+import myddl.dao.*;
+import myddl.entity.*;
 import myddl.returnobject.UserRO;
 import myddl.service.UserService;
 import org.springframework.stereotype.Service;
@@ -21,11 +15,23 @@ public class UserServiceImpl implements UserService {
     @Resource
     UserInfoMapper userInfoMapper;
     @Resource
+    UserPasswordMapper userPasswordMapper;
+    @Resource
     CourseProjectMapper courseProjectMapper;
     @Resource
     DeadlineMapper deadlineMapper;
     @Resource
     GroupMapper groupMapper;
+
+    @Override
+    public Long login(String username, String password) {
+        UserPassword userPassword = userPasswordMapper.selectByUsername(username);
+        if (userPassword != null) {
+            return userPassword.getUserId();
+        } else {
+            return null;
+        }
+    }
 
     @Override
     public UserRO getUser(Long userId) {

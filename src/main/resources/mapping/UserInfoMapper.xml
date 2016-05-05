@@ -35,10 +35,10 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="myddl.entity.UserInfo">
-    insert into myddl_user_info (user_id, user_name, user_image, 
+    insert into myddl_user_info (user_id, user_name, user_image,
       user_phone, user_email, main_screen_image
       )
-    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userImage,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userImage,jdbcType=VARCHAR},
       #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{mainScreenImage,jdbcType=INTEGER}
       )
   </insert>

@@ -20,6 +20,17 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @RequestMapping("/login")
+    @ResponseBody
+    public Object login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        Long userId = userService.login(username, password);
+        if (userId != null) {
+            return getUser(userId);
+        } else {
+            return ReturnObject.newErrorReturnObject(StatusCode.GONE, ErrorCode.ERROR_USER_NOT_EXIST);
+        }
+    }
+
     @RequestMapping("/{userId}")
     @ResponseBody
     public Object getUser(@PathVariable("userId") Long userId) {

@@ -5,6 +5,8 @@ import myddl.returnobject.UserRO;
 
 public interface UserService {
 
+    Long login(String username, String password);
+
     UserRO getUser(Long userId);
 
     void modifyUser(UserInfo userInfo);
