@@ -6,6 +6,7 @@ import myddl.entity.UserInfo;
 import myddl.entity.UserPassword;
 import myddl.returnobject.ReturnObject;
 import myddl.returnobject.UserRO;
+import myddl.service.DeadlineService;
 import myddl.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class UserController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private DeadlineService deadlineService;
 
     @RequestMapping("/login")
     @ResponseBody
@@ -78,5 +81,11 @@ public class UserController {
     public Object deleteUser(@PathVariable("userId") Long userId) {
         userService.deleteUser(userId);
         return ReturnObject.EXECUTION_SUCCESS;
+    }
+
+    @RequestMapping("/{userId}/pushDeadline")
+    @ResponseBody
+    public Object getPushDeadline(@PathVariable("userId") Long userId) {
+        return ReturnObject.newOKReturnObject(deadlineService.getPushDeadline(userId));
     }
 }
