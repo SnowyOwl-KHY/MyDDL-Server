@@ -1,6 +1,7 @@
 package myddl.dao;
 
 import myddl.entity.PushDeadline;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 @Component
 public interface PushDeadlineMapper {
     List<PushDeadline> selectByUserId(Long userId);
+
+    int deleteByUserIdAndDeadlineId(@Param("userId") Long userId, @Param("deadlineId") Long deadlineId);
 
 
     int deleteByPrimaryKey(Long pushDeadlineId);

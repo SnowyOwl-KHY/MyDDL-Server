@@ -11,6 +11,8 @@ public interface DeadlineService {
 
     List<DeadlineRO> getPushedDeadline(Long userId);
 
+    void deletePushedDeadline(Long userId, Long deadlineId);
+
     void modifyDeadline(Deadline deadline);
 
     long addDeadline(Deadline deadline, Long userId);

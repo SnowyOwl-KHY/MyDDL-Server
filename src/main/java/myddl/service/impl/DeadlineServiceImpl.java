@@ -40,6 +40,11 @@ public class DeadlineServiceImpl implements DeadlineService {
     }
 
     @Override
+    public void deletePushedDeadline(Long userId, Long deadlineId) {
+        pushDeadlineMapper.deleteByUserIdAndDeadlineId(userId, deadlineId);
+    }
+
+    @Override
     public void modifyDeadline(Deadline deadline) {
         deadlineMapper.updateByPrimaryKeySelective(deadline);
     }

@@ -88,4 +88,12 @@ public class UserController {
     public Object getPushedDeadline(@PathVariable("userId") Long userId) {
         return ReturnObject.newOKReturnObject(deadlineService.getPushedDeadline(userId));
     }
+
+    @RequestMapping(value = "/{userId}/pushDeadline/{deadlineId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Object deletePushedDeadline(@PathVariable("userId") Long userId,
+                                       @PathVariable("deadlineId") Long deadlineId) {
+        deadlineService.deletePushedDeadline(userId, deadlineId);
+        return ReturnObject.EXECUTION_SUCCESS;
+    }
 }
