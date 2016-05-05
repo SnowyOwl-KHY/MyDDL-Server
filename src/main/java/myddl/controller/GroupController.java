@@ -65,4 +65,14 @@ public class GroupController {
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
+    @RequestMapping(value = "/{groupId}/deadline", method = RequestMethod.PUT)
+    @ResponseBody
+    public Object addGroupDeadline(@PathVariable("groupId") Long groupId,
+                                   @RequestParam("deadlineId") Long deadlineId) {
+        // add the deadline to the push deadline of all user
+        return ReturnObject.EXECUTION_SUCCESS;
+    }
+
+
+
 }

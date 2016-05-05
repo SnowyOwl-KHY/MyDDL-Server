@@ -19,4 +19,6 @@ public interface DeadlineService {
 
     void deleteDeadline(Long deadlineId);
 
+    void addExistDeadlineToUser(Long userId, Long deadlineId);
+
 }

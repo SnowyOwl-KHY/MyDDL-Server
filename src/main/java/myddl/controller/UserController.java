@@ -96,4 +96,12 @@ public class UserController {
         deadlineService.deletePushedDeadline(userId, deadlineId);
         return ReturnObject.EXECUTION_SUCCESS;
     }
+
+    @RequestMapping(value = "/{userId}/deadline", method = RequestMethod.PUT)
+    @ResponseBody
+    public Object addExistDeadlineToUser(@PathVariable("userId") Long userId,
+                                         @RequestParam("deadlineId") Long deadlineId) {
+        deadlineService.addExistDeadlineToUser(userId, deadlineId);
+        return ReturnObject.EXECUTION_SUCCESS;
+    }
 }
