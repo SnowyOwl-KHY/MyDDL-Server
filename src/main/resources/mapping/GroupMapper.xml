@@ -43,10 +43,17 @@
         WHERE deadline_id = #{deadlineId}
     </delete>
 
-    <insert id="insertGroupUser" >
+    <insert id="insertGroupUser">
         INSERT INTO myddl_user_group(user_id, group_id)
         VALUES(#{userId}, #{groupId})
     </insert>
+
+    <insert id="insertGroupDeadline">
+        INSERT INTO myddl_group_deadline(group_id, deadline_id)
+        VALUES(#{groupId}, #{deadlineId})
+    </insert>
+
+
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from myddl_group

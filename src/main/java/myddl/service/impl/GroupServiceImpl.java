@@ -83,7 +83,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     /**
-     * delete group user and copy a duplicate of group deadline to this user. (if the user has anyone.)
+     * Delete group user and copy a duplicate of group deadline to this user. (if the user has anyone.)
      * @param groupId
      * @param userId
      */
@@ -102,6 +102,20 @@ public class GroupServiceImpl implements GroupService {
                 long duplicateId = deadlineMapper.insertSelective(duplicate);
                 deadlineMapper.insertUserDeadline(userId, duplicateId);
             }
+        }
+    }
+
+    /**
+     * Add the deadline to the push deadline list of all user
+     * @param groupId
+     * @param deadlineId
+     */
+    @Override
+    public void addGroupDeadline(Long groupId, Long deadlineId) {
+        groupMapper.insertGroupDeadline(groupId, deadlineId);
+        List<UserInfo> groupUsers = userInfoMapper.selectByGroupId(groupId);
+        for (UserInfo userInfo : groupUsers) {
+            pushDeadlineMapper.insertSelective(new PushDeadline(null, userInfo.getUserId(), deadlineId));
         }
     }
 

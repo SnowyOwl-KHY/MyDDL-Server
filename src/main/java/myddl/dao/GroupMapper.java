@@ -18,6 +18,8 @@ public interface GroupMapper {
 
     int deleteGroupDeadlineByDeadlineId(Long deadlineId);
 
+    int insertGroupDeadline(@Param("groupId") Long groupId, @Param("deadlineId") Long deadlineId);
+
 
     int deleteByPrimaryKey(Long groupId);
 

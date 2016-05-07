@@ -77,7 +77,7 @@ public class GroupController {
     @ResponseBody
     public Object addGroupDeadline(@PathVariable("groupId") Long groupId,
                                    @RequestParam("deadlineId") Long deadlineId) {
-        // TODO: add the deadline to the push deadline of all user
+        groupService.addGroupDeadline(groupId, deadlineId);
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
