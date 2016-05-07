@@ -12,6 +12,18 @@
     course_project_id, course_project_name, course_project_type, course_project_note, 
     course_project_image
   </sql>
+
+    <insert id="insertUserCourseProject">
+        INSERT INTO myddl_user_course_project(user_id, course_project_id)
+        VALUES(#{userId}, #{courseProjectId})
+    </insert>
+
+    <delete id="deleteUserCourseProjectByCourseProjectId">
+        DELETE FROM myddl_user_course_project
+        WHERE course_project_id = #{courseProjectId}
+    </delete>
+
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

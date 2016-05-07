@@ -25,4 +25,21 @@ public class CourseProjectServiceImpl implements CourseProjectService {
         List<Deadline> deadlines = deadlineMapper.selectByCourseProjectId(courseProjectId);
         return new CourseProjectRO(courseProject, deadlines);
     }
+
+    @Override
+    public void modifyCourseProject(CourseProject courseProject) {
+        courseProjectMapper.updateByPrimaryKeySelective(courseProject);
+    }
+
+    @Override
+    public void addCourseProject(CourseProject courseProject, Long userId) {
+        long courseProjectId = courseProjectMapper.insertSelective(courseProject);
+        courseProjectMapper.insertUserCourseProject(userId, courseProjectId);
+    }
+
+    @Override
+    public void deleteCourseProject(Long courseProjectId) {
+        courseProjectMapper.deleteByPrimaryKey(courseProjectId);
+        courseProjectMapper.deleteUserCourseProjectByCourseProjectId(courseProjectId);
+    }
 }

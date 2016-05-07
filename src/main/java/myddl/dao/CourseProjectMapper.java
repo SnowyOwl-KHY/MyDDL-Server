@@ -1,12 +1,18 @@
 package myddl.dao;
 
 import myddl.entity.CourseProject;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public interface CourseProjectMapper {
+    int insertUserCourseProject(@Param("userId") Long userId, @Param("courseProjectId") Long courseProjectId);
+
+    int deleteUserCourseProjectByCourseProjectId(Long courseProjectId);
+
+
     int deleteByPrimaryKey(Long courseProjectId);
 
     int insert(CourseProject record);

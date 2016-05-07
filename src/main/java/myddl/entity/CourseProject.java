@@ -11,6 +11,17 @@ public class CourseProject {
 
     private String courseProjectImage;
 
+    public CourseProject() {
+    }
+
+    public CourseProject(Long courseProjectId, String courseProjectName, String courseProjectType, String courseProjectNote, String courseProjectImage) {
+        this.courseProjectId = courseProjectId;
+        this.courseProjectName = courseProjectName;
+        this.courseProjectType = courseProjectType;
+        this.courseProjectNote = courseProjectNote;
+        this.courseProjectImage = courseProjectImage;
+    }
+
     public Long getCourseProjectId() {
         return courseProjectId;
     }
