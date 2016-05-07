@@ -37,6 +37,20 @@ public class Deadline {
         this.complete = complete;
     }
 
+    public Deadline duplicate() {
+        Deadline duplicate = new Deadline(null,
+                getDeadlineName(),
+                getTime(),
+                getCourseProjectId(),
+                getContactName(),
+                getContactPhone(),
+                getContactEmail(),
+                getDeadlineNote(),
+                getDeadlineImage(),
+                getComplete());
+        return duplicate;
+    }
+
     public Long getDeadlineId() {
         return deadlineId;
     }

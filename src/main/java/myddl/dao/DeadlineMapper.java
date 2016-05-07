@@ -16,6 +16,10 @@ public interface DeadlineMapper {
 
     int insertUserDeadline(@Param("userId") Long userId, @Param("deadlineId") Long deadlineId);
 
+    Long selectPrimaryKeyByUserIdAndDeadlineId(@Param("userId") Long userId, @Param("deadlineId") Long deadlineId);
+
+    int deleteUserDeadlineByPrimaryKey(Long userDeadlineId);
+
 
     int deleteByPrimaryKey(Long deadlineId);
 

@@ -55,6 +55,17 @@
         WHERE course_project_id = #{courseProjectId}
     </select>
 
+    <select id="selectPrimaryKeyByUserIdAndDeadlineId">
+        SELECT user_deadline_id
+        FROM myddl_user_deadline
+        WHERE user_id = #{userId} AND deadline_id = #{deadlineId}
+    </select>
+
+    <delete id="deleteUserDeadlineByPrimaryKey">
+        DELETE FROM myddl_user_deadline
+        WHERE user_deadline_id = #{userDeadlineId}
+    </delete>
+
     <insert id="insertUserDeadline">
         INSERT INTO myddl_user_deadline(user_id, deadline_id)
         VALUES (#{userId}, #{deadlineId})

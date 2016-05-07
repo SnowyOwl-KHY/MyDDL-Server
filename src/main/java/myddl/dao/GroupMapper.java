@@ -10,9 +10,11 @@ import java.util.List;
 public interface GroupMapper {
     List<Group> selectByUserId(Long userId);
 
-    void insertGroupUser(@Param("groupId") Long groupId, @Param("userId") Long userId);
+    void insertGroupUser(@Param("userId") Long userId, @Param("groupId") Long groupId);
 
     int deleteUserGroupByGroupId(Long groupId);
+
+    int deleteUserGroupByUserIdAndGroupId(@Param("userId") Long userId, @Param("groupId") Long groupId);
 
     int deleteGroupDeadlineByDeadlineId(Long deadlineId);
 

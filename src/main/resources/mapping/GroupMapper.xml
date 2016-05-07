@@ -33,6 +33,11 @@
         WHERE group_id = #{groupId}
     </delete>
 
+    <delete id="deleteUserGroupByUserIdAndGroupId">
+        DELETE FROM myddl_user_group
+        WHERE user_id = #{userId} AND group_id = #{groupId}
+    </delete>
+
     <delete id="deleteGroupDeadlineByDeadlineId" parameterType="java.lang.Long">
         DELETE FROM myddl_group_deadline
         WHERE deadline_id = #{deadlineId}

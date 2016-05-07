@@ -56,16 +56,7 @@ public class GroupServiceImpl implements GroupService {
         for (Deadline deadline : groupDeadlines) {
             // copy duplicate to all user
             for (UserInfo userInfo : groupUsers) {
-                Deadline duplicate = new Deadline(null,
-                        deadline.getDeadlineName(),
-                        deadline.getTime(),
-                        deadline.getCourseProjectId(),
-                        deadline.getContactName(),
-                        deadline.getContactPhone(),
-                        deadline.getContactEmail(),
-                        deadline.getDeadlineNote(),
-                        deadline.getDeadlineImage(),
-                        deadline.getComplete());
+                Deadline duplicate = deadline.duplicate();
                 long duplicateId = deadlineMapper.insertSelective(duplicate);
                 deadlineMapper.insertUserDeadline(userInfo.getUserId(), duplicateId);
             }
@@ -98,7 +89,20 @@ public class GroupServiceImpl implements GroupService {
      */
     @Override
     public void deleteGroupUser(Long groupId, Long userId) {
+        groupMapper.deleteUserGroupByUserIdAndGroupId(userId, groupId);
 
+        // delete relationship between group deadline and user, then copy that deadline(if the user has anyone).
+        List<Deadline> groupDeadlines = deadlineMapper.selectByGroupId(groupId);
+        for (Deadline deadline : groupDeadlines) {
+            Long userDeadlineId = deadlineMapper.selectPrimaryKeyByUserIdAndDeadlineId(userId, deadline.getDeadlineId());
+            if (userDeadlineId != null) {
+                deadlineMapper.deleteUserDeadlineByPrimaryKey(userDeadlineId);
+
+                Deadline duplicate = deadline.duplicate();
+                long duplicateId = deadlineMapper.insertSelective(duplicate);
+                deadlineMapper.insertUserDeadline(userId, duplicateId);
+            }
+        }
     }
 
 }
