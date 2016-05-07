@@ -7,6 +7,15 @@ public class PushDeadline {
 
     private Long deadlineId;
 
+    public PushDeadline() {
+    }
+
+    public PushDeadline(Long pushDeadlineId, Long userId, Long deadlineId) {
+        this.pushDeadlineId = pushDeadlineId;
+        this.userId = userId;
+        this.deadlineId = deadlineId;
+    }
+
     public Long getPushDeadlineId() {
         return pushDeadlineId;
     }

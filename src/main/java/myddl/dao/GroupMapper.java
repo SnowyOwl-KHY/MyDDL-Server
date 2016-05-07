@@ -14,6 +14,8 @@ public interface GroupMapper {
 
     int deleteUserGroupByGroupId(Long groupId);
 
+    int deleteGroupDeadlineByDeadlineId(Long deadlineId);
+
 
     int deleteByPrimaryKey(Long groupId);
 

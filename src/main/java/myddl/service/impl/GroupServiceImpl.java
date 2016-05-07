@@ -2,9 +2,11 @@ package myddl.service.impl;
 
 import myddl.dao.DeadlineMapper;
 import myddl.dao.GroupMapper;
+import myddl.dao.PushDeadlineMapper;
 import myddl.dao.UserInfoMapper;
 import myddl.entity.Deadline;
 import myddl.entity.Group;
+import myddl.entity.PushDeadline;
 import myddl.entity.UserInfo;
 import myddl.returnobject.GroupRO;
 import myddl.service.GroupService;
@@ -22,6 +24,8 @@ public class GroupServiceImpl implements GroupService {
     UserInfoMapper userInfoMapper;
     @Resource
     DeadlineMapper deadlineMapper;
+    @Resource
+    PushDeadlineMapper pushDeadlineMapper;
 
     @Override
     public GroupRO getGroup(Long groupId) {
@@ -46,13 +50,55 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void deleteGroup(Long groupId) {
-        // TODO: delete group deadline(copy duplicate to all user)
+        // delete relationship between group and deadline(copy duplicate to all user)
+        List<Deadline> groupDeadlines = deadlineMapper.selectByGroupId(groupId);
+        List<UserInfo> groupUsers = userInfoMapper.selectByGroupId(groupId);
+        for (Deadline deadline : groupDeadlines) {
+            // copy duplicate to all user
+            for (UserInfo userInfo : groupUsers) {
+                Deadline duplicate = new Deadline(null,
+                        deadline.getDeadlineName(),
+                        deadline.getTime(),
+                        deadline.getCourseProjectId(),
+                        deadline.getContactName(),
+                        deadline.getContactPhone(),
+                        deadline.getContactEmail(),
+                        deadline.getDeadlineNote(),
+                        deadline.getDeadlineImage(),
+                        deadline.getComplete());
+                long duplicateId = deadlineMapper.insertSelective(duplicate);
+                deadlineMapper.insertUserDeadline(userInfo.getUserId(), duplicateId);
+            }
+
+            // delete group deadline
+            groupMapper.deleteGroupDeadlineByDeadlineId(deadline.getDeadlineId());
+            deadlineMapper.deleteByPrimaryKey(deadline.getDeadlineId());
+        }
+
         groupMapper.deleteByPrimaryKey(groupId);
+        // delete relationship between group and user
         groupMapper.deleteUserGroupByGroupId(groupId);
     }
 
     @Override
     public void addGroupUser(Long groupId, Long userId) {
         groupMapper.insertGroupUser(groupId, userId);
+
+        // push the group deadline to this new user
+        List<Deadline> groupDeadlines = deadlineMapper.selectByGroupId(groupId);
+        for (Deadline deadline : groupDeadlines) {
+            pushDeadlineMapper.insertSelective(new PushDeadline(null, userId, deadline.getDeadlineId()));
+        }
     }
+
+    /**
+     * delete group user and copy a duplicate of group deadline to this user. (if the user has anyone.)
+     * @param groupId
+     * @param userId
+     */
+    @Override
+    public void deleteGroupUser(Long groupId, Long userId) {
+
+    }
+
 }

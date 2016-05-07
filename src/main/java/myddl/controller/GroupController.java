@@ -54,7 +54,6 @@ public class GroupController {
     @ResponseBody
     public Object deleteGroup(@PathVariable("groupId") Long groupId) {
         groupService.deleteGroup(groupId);
-        // TODO: delete the relationship between group&user and group&deadline
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
@@ -63,7 +62,6 @@ public class GroupController {
     public Object addGroupUser(@PathVariable("groupId") Long groupId,
                                @PathVariable("userId") Long userId) {
         groupService.addGroupUser(groupId, userId);
-        // TODO: push the group deadline to this new user
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
