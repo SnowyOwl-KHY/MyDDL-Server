@@ -12,6 +12,8 @@ public interface GroupMapper {
 
     void insertGroupUser(@Param("groupId") Long groupId, @Param("userId") Long userId);
 
+    int deleteUserGroupByGroupId(Long groupId);
+
 
     int deleteByPrimaryKey(Long groupId);
 

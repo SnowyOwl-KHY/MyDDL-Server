@@ -46,7 +46,9 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void deleteGroup(Long groupId) {
+        // TODO: delete group deadline(copy duplicate to all user)
         groupMapper.deleteByPrimaryKey(groupId);
+        groupMapper.deleteUserGroupByGroupId(groupId);
     }
 
     @Override

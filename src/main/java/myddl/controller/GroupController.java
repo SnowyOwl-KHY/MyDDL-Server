@@ -54,6 +54,7 @@ public class GroupController {
     @ResponseBody
     public Object deleteGroup(@PathVariable("groupId") Long groupId) {
         groupService.deleteGroup(groupId);
+        // TODO: delete the relationship between group&user and group&deadline
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
