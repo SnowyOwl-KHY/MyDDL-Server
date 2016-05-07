@@ -23,7 +23,7 @@ public class CourseProjectServiceImpl implements CourseProjectService {
     public CourseProjectRO getCourseProject(Long courseProjectId) {
         CourseProject courseProject = courseProjectMapper.selectByPrimaryKey(courseProjectId);
         List<Deadline> deadlines = deadlineMapper.selectByCourseProjectId(courseProjectId);
-        return new CourseProjectRO(courseProject, deadlines);
+        return new CourseProjectRO(courseProject, deadlines, courseProjectMapper);
     }
 
     @Override

@@ -1,18 +1,22 @@
 package myddl.returnobject;
 
+import myddl.dao.CourseProjectMapper;
+import myddl.entity.CourseProject;
 import myddl.entity.Deadline;
 
 public class DeadlineAbstractRO {
     private Long deadlineId;
     private String deadlineName;
     private String time;
-    private Long courseProjectId;
+    private CourseProjectAbstractRO courseProject;
 
-    public DeadlineAbstractRO(Deadline deadline) {
+    public DeadlineAbstractRO(Deadline deadline, CourseProjectMapper courseProjectMapper) {
         deadlineId = deadline.getDeadlineId();
         deadlineName = deadline.getDeadlineName();
         time = deadline.getTime();
-        courseProjectId = deadline.getCourseProjectId();
+        long courseProjectId = deadline.getCourseProjectId();
+        CourseProject courseProject = courseProjectMapper.selectByPrimaryKey(courseProjectId);
+        this.courseProject = new CourseProjectAbstractRO(courseProject);
     }
 
     public Long getDeadlineId() {
@@ -39,11 +43,11 @@ public class DeadlineAbstractRO {
         this.time = time;
     }
 
-    public Long getCourseProjectId() {
-        return courseProjectId;
+    public CourseProjectAbstractRO getCourseProject() {
+        return courseProject;
     }
 
-    public void setCourseProjectId(Long courseProjectId) {
-        this.courseProjectId = courseProjectId;
+    public void setCourseProject(CourseProjectAbstractRO courseProject) {
+        this.courseProject = courseProject;
     }
 }

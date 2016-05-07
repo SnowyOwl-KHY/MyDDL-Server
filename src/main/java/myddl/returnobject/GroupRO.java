@@ -1,5 +1,6 @@
 package myddl.returnobject;
 
+import myddl.dao.CourseProjectMapper;
 import myddl.entity.Deadline;
 import myddl.entity.Group;
 import myddl.entity.UserInfo;
@@ -15,7 +16,7 @@ public class GroupRO {
     private List<UserAbstractRO> users = new ArrayList<>();
     private List<DeadlineAbstractRO> deadlines = new ArrayList<>();
 
-    public GroupRO(Group group, List<UserInfo> userInfos, List<Deadline> deadlines) {
+    public GroupRO(Group group, List<UserInfo> userInfos, List<Deadline> deadlines, CourseProjectMapper courseProjectMapper) {
         groupId = group.getGroupId();
         groupName = group.getGroupName();
         groupImage = group.getGroupImage();
@@ -26,7 +27,7 @@ public class GroupRO {
         }
 
         for (Deadline deadline : deadlines) {
-            DeadlineAbstractRO deadlineAbstractRO = new DeadlineAbstractRO(deadline);
+            DeadlineAbstractRO deadlineAbstractRO = new DeadlineAbstractRO(deadline, courseProjectMapper);
             this.deadlines.add(deadlineAbstractRO);
         }
     }

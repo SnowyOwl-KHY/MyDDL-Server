@@ -64,7 +64,7 @@ public class UserController {
     @ResponseBody
     public Object addUser(@RequestParam("username") String username,
                           @RequestParam("password") String password,
-                          @RequestParam(value = "userName", required = false) String userName,
+                          @RequestParam("userName") String userName,
                           @RequestParam(value = "userImage", required = false) String userImage,
                           @RequestParam(value = "userPhone", required = false) String userPhone,
                           @RequestParam(value = "userEmail", required = false) String userEmail,

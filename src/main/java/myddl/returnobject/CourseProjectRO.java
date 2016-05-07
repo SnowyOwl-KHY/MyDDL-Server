@@ -1,5 +1,6 @@
 package myddl.returnobject;
 
+import myddl.dao.CourseProjectMapper;
 import myddl.entity.CourseProject;
 import myddl.entity.Deadline;
 
@@ -14,7 +15,7 @@ public class CourseProjectRO {
     private String courseProjectImage;
     private List<DeadlineAbstractRO> deadlines = new ArrayList<>();
 
-    public CourseProjectRO(CourseProject courseProject, List<Deadline> deadlines) {
+    public CourseProjectRO(CourseProject courseProject, List<Deadline> deadlines, CourseProjectMapper courseProjectMapper) {
         courseProjectId = courseProject.getCourseProjectId();
         courseProjectName = courseProject.getCourseProjectName();
         courseProjectType = courseProject.getCourseProjectType();
@@ -22,7 +23,7 @@ public class CourseProjectRO {
         courseProjectImage = courseProject.getCourseProjectImage();
 
         for (Deadline deadline : deadlines) {
-            DeadlineAbstractRO deadlineAbstractRO = new DeadlineAbstractRO(deadline);
+            DeadlineAbstractRO deadlineAbstractRO = new DeadlineAbstractRO(deadline, courseProjectMapper);
             this.deadlines.add(deadlineAbstractRO);
         }
     }
