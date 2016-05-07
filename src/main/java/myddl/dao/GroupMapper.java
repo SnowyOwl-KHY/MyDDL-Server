@@ -16,7 +16,7 @@ public interface GroupMapper {
 
     int deleteUserGroupByUserIdAndGroupId(@Param("userId") Long userId, @Param("groupId") Long groupId);
 
-    int deleteGroupDeadlineByDeadlineId(Long deadlineId);
+    int deleteGroupDeadlineByGroupIdAndDeadlineId(@Param("groupId") Long groupId, @Param("deadlineId") Long deadlineId);
 
     int insertGroupDeadline(@Param("groupId") Long groupId, @Param("deadlineId") Long deadlineId);
 

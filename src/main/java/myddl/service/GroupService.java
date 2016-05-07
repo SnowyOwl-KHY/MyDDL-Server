@@ -18,4 +18,6 @@ public interface GroupService {
     void deleteGroupUser(Long groupId, Long userId);
 
     void addGroupDeadline(Long groupId, Long deadlineId);
+
+    void deleteGroupDeadline(Long groupId, Long deadlineId);
 }

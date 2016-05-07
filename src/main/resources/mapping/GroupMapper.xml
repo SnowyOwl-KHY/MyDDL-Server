@@ -38,9 +38,9 @@
         WHERE user_id = #{userId} AND group_id = #{groupId}
     </delete>
 
-    <delete id="deleteGroupDeadlineByDeadlineId" parameterType="java.lang.Long">
+    <delete id="deleteGroupDeadlineByGroupIdAndDeadlineId">
         DELETE FROM myddl_group_deadline
-        WHERE deadline_id = #{deadlineId}
+        WHERE group_id = #{groupId} AND deadline_id = #{deadlineId}
     </delete>
 
     <insert id="insertGroupUser">

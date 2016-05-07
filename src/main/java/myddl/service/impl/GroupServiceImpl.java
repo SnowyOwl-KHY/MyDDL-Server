@@ -54,16 +54,8 @@ public class GroupServiceImpl implements GroupService {
         List<Deadline> groupDeadlines = deadlineMapper.selectByGroupId(groupId);
         List<UserInfo> groupUsers = userInfoMapper.selectByGroupId(groupId);
         for (Deadline deadline : groupDeadlines) {
-            // copy duplicate to all user
-            for (UserInfo userInfo : groupUsers) {
-                Deadline duplicate = deadline.duplicate();
-                long duplicateId = deadlineMapper.insertSelective(duplicate);
-                deadlineMapper.insertUserDeadline(userInfo.getUserId(), duplicateId);
-            }
-
-            // delete group deadline
-            groupMapper.deleteGroupDeadlineByDeadlineId(deadline.getDeadlineId());
-            deadlineMapper.deleteByPrimaryKey(deadline.getDeadlineId());
+            // copy duplicate to all user and delete group deadline
+            deleteGroupDeadlineAndCopyDuplicateToGroupUsers(groupId, deadline, groupUsers);
         }
 
         groupMapper.deleteByPrimaryKey(groupId);
@@ -117,6 +109,37 @@ public class GroupServiceImpl implements GroupService {
         for (UserInfo userInfo : groupUsers) {
             pushDeadlineMapper.insertSelective(new PushDeadline(null, userInfo.getUserId(), deadlineId));
         }
+    }
+
+    /**
+     * Delete and copy a duplicate
+     * @param groupId
+     * @param deadlineId
+     */
+    @Override
+    public void deleteGroupDeadline(Long groupId, Long deadlineId) {
+        Deadline deadline = deadlineMapper.selectByPrimaryKey(deadlineId);
+        List<UserInfo> groupUsers = userInfoMapper.selectByGroupId(groupId);
+        // copy duplicate to all user and delete group deadline
+        deleteGroupDeadlineAndCopyDuplicateToGroupUsers(groupId, deadline, groupUsers);
+    }
+
+    /**
+     * Copy duplicate to all user and delete group deadline
+     * @param groupId
+     * @param deadline
+     * @param groupUsers
+     */
+    private void deleteGroupDeadlineAndCopyDuplicateToGroupUsers(Long groupId, Deadline deadline, List<UserInfo> groupUsers) {
+        // copy duplicate to all user
+        for (UserInfo userInfo : groupUsers) {
+            Deadline duplicate = deadline.duplicate();
+            long duplicateId = deadlineMapper.insertSelective(duplicate);
+            deadlineMapper.insertUserDeadline(userInfo.getUserId(), duplicateId);
+        }
+        // delete group deadline
+        groupMapper.deleteGroupDeadlineByGroupIdAndDeadlineId(groupId, deadline.getDeadlineId());
+        deadlineMapper.deleteByPrimaryKey(deadline.getDeadlineId());
     }
 
 }

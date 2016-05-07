@@ -85,7 +85,7 @@ public class GroupController {
     @ResponseBody
     public Object deleteGroupDeadline(@PathVariable("groupId") Long groupId,
                                    @PathVariable("deadlineId") Long deadlineId) {
-        // TODO: delete and copy a duplicate
+        groupService.deleteGroupDeadline(groupId, deadlineId);
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
