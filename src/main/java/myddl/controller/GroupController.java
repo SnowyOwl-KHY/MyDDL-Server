@@ -69,7 +69,7 @@ public class GroupController {
     @ResponseBody
     public Object deleteGroupUser(@PathVariable("groupId") Long groupId,
                                   @PathVariable("userId") Long userId) {
-        // TODO: delete group user and copy a duplicate of group deadline to this user. (if the user has anyone.)
+        groupService.deleteGroupUser(groupId, userId);
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
