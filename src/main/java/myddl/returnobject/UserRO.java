@@ -16,7 +16,7 @@ public class UserRO {
     private String userPhone;
     private String userEmail;
     private Integer mainScreenImage;
-    private List<DeadlineAbstractRO> deadlines = new ArrayList<>();
+    private List<DeadlineRO> deadlines = new ArrayList<>();
     private List<GroupAbstractRO> groups = new ArrayList<>();
     private List<CourseProjectAbstractRO> courseProjects = new ArrayList<>();
 
@@ -29,8 +29,8 @@ public class UserRO {
         mainScreenImage = userInfo.getMainScreenImage();
 
         for (Deadline deadline : deadlines) {
-            DeadlineAbstractRO deadlineAbstractRO = new DeadlineAbstractRO(deadline, courseProjectMapper);
-            this.deadlines.add(deadlineAbstractRO);
+            DeadlineRO deadlineRO = new DeadlineRO(deadline, courseProjectMapper);
+            this.deadlines.add(deadlineRO);
         }
 
         for (Group group : groups) {
@@ -92,11 +92,11 @@ public class UserRO {
         this.mainScreenImage = mainScreenImage;
     }
 
-    public List<DeadlineAbstractRO> getDeadlines() {
+    public List<DeadlineRO> getDeadlines() {
         return deadlines;
     }
 
-    public void setDeadlines(List<DeadlineAbstractRO> deadlines) {
+    public void setDeadlines(List<DeadlineRO> deadlines) {
         this.deadlines = deadlines;
     }
 

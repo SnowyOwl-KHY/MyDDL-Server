@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long login(String username, String password) {
         UserPassword userPassword = userPasswordMapper.selectByUsername(username);
-        if (userPassword != null) {
+        if (userPassword != null && userPassword.getPassword().equals(password)) {
             return userPassword.getUserId();
         } else {
             return null;
