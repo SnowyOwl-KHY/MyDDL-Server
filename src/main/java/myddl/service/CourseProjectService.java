@@ -9,7 +9,7 @@ public interface CourseProjectService {
 
     void modifyCourseProject(CourseProject courseProject);
 
-    void addCourseProject(CourseProject courseProject, Long userId);
+    long addCourseProject(CourseProject courseProject, Long userId);
 
     void deleteCourseProject(Long courseProjectId);
 

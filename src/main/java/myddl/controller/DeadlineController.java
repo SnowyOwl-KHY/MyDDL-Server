@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 @Controller
 @RequestMapping("/deadline")
@@ -57,10 +58,12 @@ public class DeadlineController {
                               @RequestParam(value = "deadlineNote", required = false) String deadlineNote,
                               @RequestParam(value = "deadlineImage", required = false) String deadlineImage,
                               @RequestParam(value = "complete", required = false) Boolean complete) {
-        deadlineService.addDeadline(
+        long deadlineId = deadlineService.addDeadline(
                 new Deadline(null, deadlineName, time, courseProjectId, contactName, contactPhone, contactEmail, deadlineNote, deadlineImage, complete),
                 userId);
-        return ReturnObject.EXECUTION_SUCCESS;
+        HashMap<String, Long> result = new HashMap<>();
+        result.put("deadlineId", deadlineId);
+        return ReturnObject.newOKReturnObject(result);
     }
 
     @RequestMapping(value = "/{deadlineId}", method = RequestMethod.DELETE)

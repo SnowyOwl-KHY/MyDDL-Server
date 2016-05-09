@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 @Controller
 @RequestMapping("/courseProject")
@@ -48,10 +49,12 @@ public class CourseProjectController {
                                    @RequestParam("courseProjectType") String courseProjectType,
                                    @RequestParam(value = "courseProjectNote", required = false) String courseProjectNote,
                                    @RequestParam(value = "courseProjectImage", required = false) String courseProjectImage) {
-        courseProjectService.addCourseProject(
+        long courseProjectId = courseProjectService.addCourseProject(
                 new CourseProject(null, courseProjectName, courseProjectType, courseProjectNote, courseProjectImage),
                 userId);
-        return ReturnObject.EXECUTION_SUCCESS;
+        HashMap<String, Long> result = new HashMap<>();
+        result.put("courseProjectId", courseProjectId);
+        return ReturnObject.newOKReturnObject(result);
     }
 
     @RequestMapping(value = "/{courseProjectId}", method = RequestMethod.DELETE)

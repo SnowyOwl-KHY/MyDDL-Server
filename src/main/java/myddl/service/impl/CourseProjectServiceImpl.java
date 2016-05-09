@@ -32,10 +32,11 @@ public class CourseProjectServiceImpl implements CourseProjectService {
     }
 
     @Override
-    public void addCourseProject(CourseProject courseProject, Long userId) {
+    public long addCourseProject(CourseProject courseProject, Long userId) {
         courseProjectMapper.insertSelective(courseProject);
         long courseProjectId = courseProject.getCourseProjectId();
         courseProjectMapper.insertUserCourseProject(userId, courseProjectId);
+        return courseProjectId;
     }
 
     @Override
