@@ -43,7 +43,8 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Long addGroup(Group group) {
-        long groupId = groupMapper.insertSelective(group);
+        groupMapper.insertSelective(group);
+        long groupId = group.getGroupId();
         return groupId;
     }
 
@@ -75,6 +76,7 @@ public class GroupServiceImpl implements GroupService {
 
     /**
      * Delete group user and copy a duplicate of group deadline to this user. (if the user has anyone.)
+     *
      * @param groupId
      * @param userId
      */
@@ -90,7 +92,8 @@ public class GroupServiceImpl implements GroupService {
                 deadlineMapper.deleteUserDeadlineByPrimaryKey(userDeadlineId);
 
                 Deadline duplicate = deadline.duplicate();
-                long duplicateId = deadlineMapper.insertSelective(duplicate);
+                deadlineMapper.insertSelective(duplicate);
+                long duplicateId = duplicate.getDeadlineId();
                 deadlineMapper.insertUserDeadline(userId, duplicateId);
             }
         }
@@ -98,6 +101,7 @@ public class GroupServiceImpl implements GroupService {
 
     /**
      * Add the deadline to the push deadline list of all user
+     *
      * @param groupId
      * @param deadlineId
      */
@@ -112,6 +116,7 @@ public class GroupServiceImpl implements GroupService {
 
     /**
      * Delete and copy a duplicate
+     *
      * @param groupId
      * @param deadlineId
      */
@@ -125,6 +130,7 @@ public class GroupServiceImpl implements GroupService {
 
     /**
      * Copy duplicate to all user and delete group deadline
+     *
      * @param groupId
      * @param deadline
      * @param groupUsers
@@ -133,7 +139,8 @@ public class GroupServiceImpl implements GroupService {
         // copy duplicate to all user
         for (UserInfo userInfo : groupUsers) {
             Deadline duplicate = deadline.duplicate();
-            long duplicateId = deadlineMapper.insertSelective(duplicate);
+            deadlineMapper.insertSelective(duplicate);
+            long duplicateId = duplicate.getDeadlineId();
             deadlineMapper.insertUserDeadline(userInfo.getUserId(), duplicateId);
         }
         // delete group deadline

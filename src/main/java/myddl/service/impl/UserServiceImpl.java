@@ -52,7 +52,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public long addUser(UserPassword userPassword, UserInfo userInfo) {
-        long userId = userPasswordMapper.insertSelective(userPassword);
+        userPasswordMapper.insertSelective(userPassword);
+        long userId = userPassword.getUserId();
         userInfo.setUserId(userId);
         userInfoMapper.insertSelective(userInfo);
         return userId;
