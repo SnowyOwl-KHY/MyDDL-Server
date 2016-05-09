@@ -51,8 +51,9 @@ public class DeadlineServiceImpl implements DeadlineService {
 
     @Override
     public long addDeadline(Deadline deadline, Long userId) {
-        long deadlineId = deadlineMapper.insertSelective(deadline);
-        deadlineMapper.insertUserDeadline(deadlineId, userId);
+        deadlineMapper.insertSelective(deadline);
+        long deadlineId = deadline.getDeadlineId();
+        deadlineMapper.insertUserDeadline(userId, deadlineId);
         return deadlineId;
     }
 

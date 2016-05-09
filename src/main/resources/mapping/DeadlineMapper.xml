@@ -75,7 +75,7 @@
     delete from myddl_deadline
     where deadline_id = #{deadlineId,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="myddl.entity.Deadline">
+    <insert id="insert" parameterType="myddl.entity.Deadline" keyColumn="deadline_id" keyProperty="deadlineId">
     insert into myddl_deadline (deadline_id, deadline_name, time, 
       course_project_id, contact_name, contact_phone, 
       contact_email, deadline_note, deadline_image, 
@@ -85,7 +85,7 @@
       #{contactEmail,jdbcType=VARCHAR}, #{deadlineNote,jdbcType=VARCHAR}, #{deadlineImage,jdbcType=VARCHAR}, 
       #{complete,jdbcType=BIT})
   </insert>
-    <insert id="insertSelective" parameterType="myddl.entity.Deadline">
+    <insert id="insertSelective" parameterType="myddl.entity.Deadline" useGeneratedKeys="true" keyColumn="deadline_id" keyProperty="deadlineId">
         insert into myddl_deadline
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="deadlineId != null">

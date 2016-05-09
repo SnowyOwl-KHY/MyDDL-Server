@@ -59,13 +59,13 @@
     delete from myddl_group
     where group_id = #{groupId,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="myddl.entity.Group">
+    <insert id="insert" parameterType="myddl.entity.Group" keyColumn="group_id" keyProperty="groupId">
     insert into myddl_group (group_id, group_name, group_image
       )
     values (#{groupId,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, #{groupImage,jdbcType=VARCHAR}
       )
   </insert>
-    <insert id="insertSelective" parameterType="myddl.entity.Group">
+    <insert id="insertSelective" parameterType="myddl.entity.Group" useGeneratedKeys="true" keyColumn="group_id" keyProperty="groupId">
         insert into myddl_group
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="groupId != null">

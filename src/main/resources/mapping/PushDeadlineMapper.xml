@@ -32,13 +32,13 @@
     delete from myddl_push_deadline
     where push_deadline_id = #{pushDeadlineId,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="myddl.entity.PushDeadline">
+    <insert id="insert" parameterType="myddl.entity.PushDeadline" keyColumn="push_deadline_id" keyProperty="pushDeadlineId">
     insert into myddl_push_deadline (push_deadline_id, user_id, deadline_id
       )
     values (#{pushDeadlineId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{deadlineId,jdbcType=BIGINT}
       )
   </insert>
-    <insert id="insertSelective" parameterType="myddl.entity.PushDeadline">
+    <insert id="insertSelective" parameterType="myddl.entity.PushDeadline" useGeneratedKeys="true"  keyColumn="push_deadline_id" keyProperty="pushDeadlineId">
         insert into myddl_push_deadline
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="pushDeadlineId != null">
