@@ -68,7 +68,10 @@ public class UserController {
                           @RequestParam(value = "userImage", required = false) String userImage,
                           @RequestParam(value = "userPhone", required = false) String userPhone,
                           @RequestParam(value = "userEmail", required = false) String userEmail,
-                          @RequestParam("mainScreenImage") Integer mainScreenImage) {
+                          @RequestParam(value = "mainScreenImage", required = false) Integer mainScreenImage) {
+        if (mainScreenImage == null) {
+            mainScreenImage = 0;
+        }
         long userId = userService.addUser(new UserPassword(null, username, password),
                 new UserInfo(null, userName, userImage, userPhone, userEmail, mainScreenImage));
         Map<String, Object> result = new HashMap<>();
