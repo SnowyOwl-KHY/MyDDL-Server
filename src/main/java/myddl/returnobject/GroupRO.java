@@ -1,6 +1,8 @@
 package myddl.returnobject;
 
 import myddl.dao.CourseProjectMapper;
+import myddl.dao.DeadlineMapper;
+import myddl.dao.UserInfoMapper;
 import myddl.entity.Deadline;
 import myddl.entity.Group;
 import myddl.entity.UserInfo;
@@ -17,6 +19,17 @@ public class GroupRO {
     private List<DeadlineAbstractRO> deadlines = new ArrayList<>();
 
     public GroupRO(Group group, List<UserInfo> userInfos, List<Deadline> deadlines, CourseProjectMapper courseProjectMapper) {
+        initial(group, userInfos, deadlines, courseProjectMapper);
+    }
+
+    public GroupRO(Group group, UserInfoMapper userInfoMapper, DeadlineMapper deadlineMapper, CourseProjectMapper courseProjectMapper) {
+        long groupId = group.getGroupId();
+        List<UserInfo> users = userInfoMapper.selectByGroupId(groupId);
+        List<Deadline> deadlines = deadlineMapper.selectByGroupId(groupId);
+        initial(group, users, deadlines, courseProjectMapper);
+    }
+
+    private void initial(Group group, List<UserInfo> userInfos, List<Deadline> deadlines, CourseProjectMapper courseProjectMapper) {
         groupId = group.getGroupId();
         groupName = group.getGroupName();
         groupImage = group.getGroupImage();

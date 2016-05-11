@@ -1,6 +1,8 @@
 package myddl.returnobject;
 
 import myddl.dao.CourseProjectMapper;
+import myddl.dao.DeadlineMapper;
+import myddl.dao.UserInfoMapper;
 import myddl.entity.CourseProject;
 import myddl.entity.Deadline;
 import myddl.entity.Group;
@@ -17,10 +19,10 @@ public class UserRO {
     private String userEmail;
     private Integer mainScreenImage;
     private List<DeadlineRO> deadlines = new ArrayList<>();
-    private List<GroupAbstractRO> groups = new ArrayList<>();
+    private List<GroupRO> groups = new ArrayList<>();
     private List<CourseProjectAbstractRO> courseProjects = new ArrayList<>();
 
-    public UserRO(UserInfo userInfo, List<Deadline> deadlines, List<Group> groups, List<CourseProject> courseProjects, CourseProjectMapper courseProjectMapper) {
+    public UserRO(UserInfo userInfo, List<Deadline> deadlines, List<Group> groups, List<CourseProject> courseProjects, UserInfoMapper userInfoMapper, DeadlineMapper deadlineMapper, CourseProjectMapper courseProjectMapper) {
         userId = userInfo.getUserId();
         userName = userInfo.getUserName();
         userImage = userInfo.getUserImage();
@@ -34,8 +36,8 @@ public class UserRO {
         }
 
         for (Group group : groups) {
-            GroupAbstractRO groupAbstractRO = new GroupAbstractRO(group);
-            this.groups.add(groupAbstractRO);
+            GroupRO groupRO = new GroupRO(group, userInfoMapper, deadlineMapper, courseProjectMapper);
+            this.groups.add(groupRO);
         }
 
         for (CourseProject courseProject : courseProjects) {
@@ -100,11 +102,11 @@ public class UserRO {
         this.deadlines = deadlines;
     }
 
-    public List<GroupAbstractRO> getGroups() {
+    public List<GroupRO> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<GroupAbstractRO> groups) {
+    public void setGroups(List<GroupRO> groups) {
         this.groups = groups;
     }
 

@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         List<Deadline> deadlines = deadlineMapper.selectByUserId(userId);
         List<Group> groups = groupMapper.selectByUserId(userId);
         List<CourseProject> courseProjects = courseProjectMapper.selectByUserId(userId);
-        return new UserRO(userInfo, deadlines, groups, courseProjects, courseProjectMapper);
+        return new UserRO(userInfo, deadlines, groups, courseProjects, userInfoMapper, deadlineMapper, courseProjectMapper);
     }
 
     @Override
