@@ -58,6 +58,7 @@ public class DeadlineController {
                               @RequestParam(value = "deadlineNote", required = false) String deadlineNote,
                               @RequestParam(value = "deadlineImage", required = false) String deadlineImage,
                               @RequestParam(value = "complete", required = false) Boolean complete) {
+        if (complete == null) complete = false;
         long deadlineId = deadlineService.addDeadline(
                 new Deadline(null, deadlineName, time, courseProjectId, contactName, contactPhone, contactEmail, deadlineNote, deadlineImage, complete),
                 userId);
