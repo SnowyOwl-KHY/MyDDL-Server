@@ -1,7 +1,10 @@
 package myddl.service;
 
 import myddl.entity.Group;
+import myddl.entity.GroupMessage;
 import myddl.returnobject.GroupRO;
+
+import java.util.List;
 
 public interface GroupService {
 
@@ -17,7 +20,9 @@ public interface GroupService {
 
     void deleteGroupUser(Long groupId, Long userId);
 
-    void addGroupDeadline(Long groupId, Long deadlineId);
+    void addGroupDeadline(Long groupId, Long deadlineId, long userId);
 
     void deleteGroupDeadline(Long groupId, Long deadlineId);
+
+    List<GroupMessage> getGroupMessage(Long groupId);
 }

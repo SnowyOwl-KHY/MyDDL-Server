@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myddl.dao.GroupMessageMapper" >
+  <resultMap id="BaseResultMap" type="myddl.entity.GroupMessage" >
+    <id column="group_message_id" property="groupMessageId" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    group_message_id, content, time, group_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from myddl_group_message
+    where group_message_id = #{groupMessageId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from myddl_group_message
+    where group_id = #{groupId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from myddl_group_message
+    where group_message_id = #{groupMessageId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="myddl.entity.GroupMessage" >
+    insert into myddl_group_message (group_message_id, content, time, 
+      group_id)
+    values (#{groupMessageId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
+      #{groupId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="myddl.entity.GroupMessage" >
+    insert into myddl_group_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupMessageId != null" >
+        group_message_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupMessageId != null" >
+        #{groupMessageId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="myddl.entity.GroupMessage" >
+    update myddl_group_message
+    <set >
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where group_message_id = #{groupMessageId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="myddl.entity.GroupMessage" >
+    update myddl_group_message
+    set content = #{content,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=BIGINT}
+    where group_message_id = #{groupMessageId,jdbcType=BIGINT}
+  </update>
+</mapper>

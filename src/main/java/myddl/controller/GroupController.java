@@ -76,8 +76,9 @@ public class GroupController {
     @RequestMapping(value = "/{groupId}/deadline", method = RequestMethod.PUT)
     @ResponseBody
     public Object addGroupDeadline(@PathVariable("groupId") Long groupId,
-                                   @RequestParam("deadlineId") Long deadlineId) {
-        groupService.addGroupDeadline(groupId, deadlineId);
+                                   @RequestParam("deadlineId") Long deadlineId,
+                                   @RequestParam("userId") Long userId) {
+        groupService.addGroupDeadline(groupId, deadlineId, userId);
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
@@ -87,6 +88,12 @@ public class GroupController {
                                    @PathVariable("deadlineId") Long deadlineId) {
         groupService.deleteGroupDeadline(groupId, deadlineId);
         return ReturnObject.EXECUTION_SUCCESS;
+    }
+
+    @RequestMapping("/{groupId}/message")
+    @ResponseBody
+    public Object getGroupMessage(@PathVariable("groupId") Long groupId) {
+        return ReturnObject.newOKReturnObject(groupService.getGroupMessage(groupId));
     }
 
 }

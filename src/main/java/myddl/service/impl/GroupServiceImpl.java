@@ -1,15 +1,14 @@
 package myddl.service.impl;
 
 import myddl.dao.*;
-import myddl.entity.Deadline;
-import myddl.entity.Group;
-import myddl.entity.PushDeadline;
-import myddl.entity.UserInfo;
+import myddl.entity.*;
 import myddl.returnobject.GroupRO;
 import myddl.service.GroupService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service("groupService")
@@ -21,6 +20,8 @@ public class GroupServiceImpl implements GroupService {
     UserInfoMapper userInfoMapper;
     @Resource
     DeadlineMapper deadlineMapper;
+    @Resource
+    GroupMessageMapper groupMessageMapper;
     @Resource
     PushDeadlineMapper pushDeadlineMapper;
     @Resource
@@ -106,12 +107,19 @@ public class GroupServiceImpl implements GroupService {
      * @param deadlineId
      */
     @Override
-    public void addGroupDeadline(Long groupId, Long deadlineId) {
+    public void addGroupDeadline(Long groupId, Long deadlineId, long userId) {
         groupMapper.insertGroupDeadline(groupId, deadlineId);
+
         List<UserInfo> groupUsers = userInfoMapper.selectByGroupId(groupId);
-        for (UserInfo userInfo : groupUsers) {
-            pushDeadlineMapper.insertSelective(new PushDeadline(null, userInfo.getUserId(), deadlineId));
-        }
+        groupUsers.stream().filter(userInfo -> userInfo.getUserId() != userId).forEach(userInfo ->
+                        pushDeadlineMapper.insertSelective(new PushDeadline(null, userInfo.getUserId(), deadlineId)));
+
+        UserInfo user = userInfoMapper.selectByPrimaryKey(userId);
+
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
+        String timeString = format.format(date);
+        groupMessageMapper.insertSelective(new GroupMessage(null, user.getUserName() + " share a deadline.", timeString, groupId));
     }
 
     /**
@@ -126,6 +134,11 @@ public class GroupServiceImpl implements GroupService {
         List<UserInfo> groupUsers = userInfoMapper.selectByGroupId(groupId);
         // copy duplicate to all user and delete group deadline
         deleteGroupDeadlineAndCopyDuplicateToGroupUsers(groupId, deadline, groupUsers);
+    }
+
+    @Override
+    public List<GroupMessage> getGroupMessage(Long groupId) {
+        return groupMessageMapper.selectByGroupId(groupId);
     }
 
     /**
