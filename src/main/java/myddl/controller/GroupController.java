@@ -57,10 +57,10 @@ public class GroupController {
         return ReturnObject.EXECUTION_SUCCESS;
     }
 
-    @RequestMapping(value = "/{groupId}/user/{userId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{groupId}/user", method = RequestMethod.PUT)
     @ResponseBody
     public Object addGroupUser(@PathVariable("groupId") Long groupId,
-                               @PathVariable("userId") Long userId) {
+                               @RequestParam("userId") Long userId) {
         groupService.addGroupUser(groupId, userId);
         return ReturnObject.EXECUTION_SUCCESS;
     }
