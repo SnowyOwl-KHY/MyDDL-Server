@@ -13,7 +13,7 @@ public class CourseProjectRO {
     private String courseProjectType;
     private String courseProjectNote;
     private String courseProjectImage;
-    private List<DeadlineAbstractRO> deadlines = new ArrayList<>();
+    private List<DeadlineRO> deadlines = new ArrayList<>();
 
     public CourseProjectRO(CourseProject courseProject, List<Deadline> deadlines, CourseProjectMapper courseProjectMapper) {
         courseProjectId = courseProject.getCourseProjectId();
@@ -23,8 +23,8 @@ public class CourseProjectRO {
         courseProjectImage = courseProject.getCourseProjectImage();
 
         for (Deadline deadline : deadlines) {
-            DeadlineAbstractRO deadlineAbstractRO = new DeadlineAbstractRO(deadline, courseProjectMapper);
-            this.deadlines.add(deadlineAbstractRO);
+            DeadlineRO deadlineRO = new DeadlineRO(deadline, courseProjectMapper);
+            this.deadlines.add(deadlineRO);
         }
     }
 
@@ -68,11 +68,11 @@ public class CourseProjectRO {
         this.courseProjectImage = courseProjectImage;
     }
 
-    public List<DeadlineAbstractRO> getDeadlines() {
+    public List<DeadlineRO> getDeadlines() {
         return deadlines;
     }
 
-    public void setDeadlines(List<DeadlineAbstractRO> deadlines) {
+    public void setDeadlines(List<DeadlineRO> deadlines) {
         this.deadlines = deadlines;
     }
 }
