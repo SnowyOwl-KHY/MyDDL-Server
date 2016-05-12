@@ -86,8 +86,9 @@ public class GroupController {
     @RequestMapping(value = "/{groupId}/deadline/{deadlineId}", method = RequestMethod.DELETE)
     @ResponseBody
     public Object deleteGroupDeadline(@PathVariable("groupId") Long groupId,
-                                   @PathVariable("deadlineId") Long deadlineId) {
-        groupService.deleteGroupDeadline(groupId, deadlineId);
+                                      @PathVariable("deadlineId") Long deadlineId,
+                                      @RequestParam("userId") Long userId) {
+        groupService.deleteGroupDeadline(groupId, deadlineId, userId);
         return ReturnObject.EXECUTION_SUCCESS;
     }
 

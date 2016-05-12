@@ -22,7 +22,7 @@ public interface GroupService {
 
     void addGroupDeadline(Long groupId, Long deadlineId, long userId);
 
-    void deleteGroupDeadline(Long groupId, Long deadlineId);
+    void deleteGroupDeadline(Long groupId, Long deadlineId, long userId);
 
     List<GroupMessage> getGroupMessage(Long groupId);
 }

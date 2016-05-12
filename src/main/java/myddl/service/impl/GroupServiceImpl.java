@@ -116,11 +116,11 @@ public class GroupServiceImpl implements GroupService {
                         pushDeadlineMapper.insertSelective(new PushDeadline(null, userInfo.getUserId(), deadlineId)));
 
         UserInfo user = userInfoMapper.selectByPrimaryKey(userId);
-
+        Deadline deadline = deadlineMapper.selectByPrimaryKey(deadlineId);
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
         String timeString = format.format(date);
-        groupMessageMapper.insertSelective(new GroupMessage(null, user.getUserName() + " share a deadline.", timeString, groupId));
+        groupMessageMapper.insertSelective(new GroupMessage(null, user.getUserName() + " share deadline: " + deadline.getDeadlineName(), timeString, groupId));
     }
 
     /**
@@ -130,11 +130,17 @@ public class GroupServiceImpl implements GroupService {
      * @param deadlineId
      */
     @Override
-    public void deleteGroupDeadline(Long groupId, Long deadlineId) {
+    public void deleteGroupDeadline(Long groupId, Long deadlineId, long userId) {
         Deadline deadline = deadlineMapper.selectByPrimaryKey(deadlineId);
         List<UserInfo> groupUsers = userInfoMapper.selectByGroupId(groupId);
         // copy duplicate to all user and delete group deadline
         deleteGroupDeadlineAndCopyDuplicateToGroupUsers(groupId, deadline, groupUsers);
+
+        UserInfo user = userInfoMapper.selectByPrimaryKey(userId);
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
+        String timeString = format.format(date);
+        groupMessageMapper.insertSelective(new GroupMessage(null, user.getUserName() + " delete deadline: " + deadline.getDeadlineName(), timeString, groupId));
     }
 
     @Override
