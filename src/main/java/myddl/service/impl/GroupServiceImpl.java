@@ -43,9 +43,10 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Long addGroup(Group group) {
+    public Long addGroup(Group group, Long userId) {
         groupMapper.insertSelective(group);
         long groupId = group.getGroupId();
+        addGroupUser(groupId, userId);
         return groupId;
     }
 

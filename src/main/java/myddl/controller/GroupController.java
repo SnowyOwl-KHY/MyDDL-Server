@@ -43,8 +43,9 @@ public class GroupController {
     @RequestMapping(value = "", method = RequestMethod.PUT)
     @ResponseBody
     public Object addGroup(@RequestParam("groupName") String groupName,
-                           @RequestParam("groupImage") String groupImage) {
-        Long groupId = groupService.addGroup(new Group(null, groupName, groupImage));
+                           @RequestParam("groupImage") String groupImage,
+                           @RequestParam("userId") Long userId) {
+        Long groupId = groupService.addGroup(new Group(null, groupName, groupImage), userId);
         Map<String, Object> result = new HashMap<>();
         result.put("groupId", groupId);
         return ReturnObject.newOKReturnObject(result);

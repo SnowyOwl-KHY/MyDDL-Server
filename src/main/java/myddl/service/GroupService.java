@@ -12,7 +12,7 @@ public interface GroupService {
 
     void modifyGroup(Group group);
 
-    Long addGroup(Group group);
+    Long addGroup(Group group, Long userId);
 
     void deleteGroup(Long groupId);
 
