@@ -2,10 +2,11 @@ package myddl.dao;
 
 import myddl.entity.GroupMessage;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service("groupMessageMapper")
 public interface GroupMessageMapper {
     List<GroupMessage> selectByGroupId(Long groupId);
 

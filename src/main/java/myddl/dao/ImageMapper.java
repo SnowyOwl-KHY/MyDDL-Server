@@ -2,8 +2,9 @@ package myddl.dao;
 
 import myddl.entity.Image;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service("imageMapper")
 public interface ImageMapper {
     int deleteByPrimaryKey(Long imageId);
 

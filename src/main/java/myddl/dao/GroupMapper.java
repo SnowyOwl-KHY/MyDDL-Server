@@ -3,10 +3,11 @@ package myddl.dao;
 import myddl.entity.Group;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service("groupMapper")
 public interface GroupMapper {
     List<Group> selectByUserId(Long userId);
 

@@ -3,10 +3,11 @@ package myddl.dao;
 import myddl.entity.CourseProject;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service("courseProjectMapper")
 public interface CourseProjectMapper {
     int insertUserCourseProject(@Param("userId") Long userId, @Param("courseProjectId") Long courseProjectId);
 

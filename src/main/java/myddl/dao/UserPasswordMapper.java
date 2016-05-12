@@ -2,8 +2,9 @@ package myddl.dao;
 
 import myddl.entity.UserPassword;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service("userPasswordMapper")
 public interface UserPasswordMapper {
 
     UserPassword selectByUsername(String username);

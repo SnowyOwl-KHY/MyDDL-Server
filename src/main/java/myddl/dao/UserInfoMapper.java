@@ -2,10 +2,11 @@ package myddl.dao;
 
 import myddl.entity.UserInfo;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service("userInfoMapper")
 public interface UserInfoMapper {
     List<UserInfo> selectByGroupId(Long groupId);
 

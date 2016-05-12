@@ -3,10 +3,11 @@ package myddl.dao;
 import myddl.entity.PushDeadline;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service("pushDeadlineMapper")
 public interface PushDeadlineMapper {
     List<PushDeadline> selectByUserId(Long userId);
 
