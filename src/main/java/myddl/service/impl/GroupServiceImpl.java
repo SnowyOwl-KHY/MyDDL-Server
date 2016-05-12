@@ -67,7 +67,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void addGroupUser(Long groupId, Long userId) {
-        groupMapper.insertGroupUser(groupId, userId);
+        groupMapper.insertGroupUser(userId, groupId);
 
         // push the group deadline to this new user
         List<Deadline> groupDeadlines = deadlineMapper.selectByGroupId(groupId);
