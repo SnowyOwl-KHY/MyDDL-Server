@@ -46,7 +46,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void modifyUser(UserPassword userPassword, UserInfo userInfo) {
-        userPasswordMapper.updateByPrimaryKeySelective(userPassword);
+        if (userPassword != null) {
+            userPasswordMapper.updateByPrimaryKeySelective(userPassword);
+        }
         userInfoMapper.updateByPrimaryKeySelective(userInfo);
     }
 

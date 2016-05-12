@@ -55,7 +55,11 @@ public class UserController {
                              @RequestParam(value = "userPhone", required = false) String userPhone,
                              @RequestParam(value = "userEmail", required = false) String userEmail,
                              @RequestParam(value = "mainScreenImage", required = false) Integer mainScreenImage) {
-        userService.modifyUser(new UserPassword(userId, null, password),
+        UserPassword userPassword = null;
+        if (password != null) {
+            userPassword = new UserPassword(userId, null, password);
+        }
+        userService.modifyUser(userPassword,
                 new UserInfo(userId, userName, userImage, userPhone, userEmail, mainScreenImage));
         return ReturnObject.EXECUTION_SUCCESS;
     }
