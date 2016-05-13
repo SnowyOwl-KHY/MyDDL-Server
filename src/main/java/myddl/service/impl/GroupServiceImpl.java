@@ -74,6 +74,12 @@ public class GroupServiceImpl implements GroupService {
         for (Deadline deadline : groupDeadlines) {
             pushDeadlineMapper.insertSelective(new PushDeadline(null, userId, deadline.getDeadlineId()));
         }
+
+        UserInfo user = userInfoMapper.selectByPrimaryKey(userId);
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
+        String timeString = format.format(date);
+        groupMessageMapper.insertSelective(new GroupMessage(null, user.getUserName() + " join group.", timeString, groupId));
     }
 
     /**
@@ -99,6 +105,12 @@ public class GroupServiceImpl implements GroupService {
                 deadlineMapper.insertUserDeadline(userId, duplicateId);
             }
         }
+
+        UserInfo user = userInfoMapper.selectByPrimaryKey(userId);
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
+        String timeString = format.format(date);
+        groupMessageMapper.insertSelective(new GroupMessage(null, user.getUserName() + " quit group.", timeString, groupId));
     }
 
     /**
